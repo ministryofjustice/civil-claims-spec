@@ -1,15 +1,16 @@
 @rbac
 Feature: Role Based Access Matrix
-  Scenario: New claim, personal details
+  Scenario Outline: New claim, personal details
     Given a new claim with a Property, Landlord and Tenant
-    And I am authenticated as a user with <Role>
-    When I try to perform <Action> on this claim
-    Then I expect my request to be an <Outcome>
+    And I authenticate as a <Role>
+    When I try to <Action> this claim
+    Then I expect my request to <Outcome>
+
     Examples:
     | Role     | Action   | Outcome |
-    | claimant | retrieve | success |
-    | claimant | update   | success |
-    | claimant | delete   | success |
-    | tenant   | retrieve | failure |
-    | tenant   | update   | failure |
-    | tenant   | delete   | failure |
+    | claimant | retrieve | succeed |
+    | claimant | update   | succeed |
+    | claimant | delete   | succeed |
+    | tenant   | retrieve | fail    |
+    | tenant   | update   | fail    |
+    | tenant   | delete   | fail    |
