@@ -21,3 +21,4 @@ Feature: Social Landlord, Submit Claim, Step 1
     Examples:
     | formitem | text | validate | message                                         |
     | email    | abc  | fail     | Email address must be in format name@server.com |
+    
