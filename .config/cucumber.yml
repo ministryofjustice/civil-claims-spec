@@ -1,0 +1,5 @@
+# config/cucumber.yml
+##YAML Template
+---
+default: features --format pretty --require support
+guard: --format pretty --strict --require support

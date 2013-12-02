@@ -2,3 +2,8 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'cucumber'
 gem 'rake'
+gem 'capybara'
+gem 'hashie'
+gem "poltergeist"
+gem 'rspec'
+gem 'guard-cucumber'
