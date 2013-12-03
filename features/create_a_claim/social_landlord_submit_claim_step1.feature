@@ -21,3 +21,31 @@ Feature: Social Landlord, Submit Claim, Step 1
     Examples:
     | formitem | text | validate | message                                         |
     | email    | abc  | fail     | Email address must be in format name@server.com |
+
+  @ia
+  Scenario Outline: Access control
+    Given a new claim with a Property, Landlord and Tenant
+    And I authenticate as a <Role>
+    When I try to <Action> this claim
+    Then I expect my request to <Outcome>
+
+    Examples:
+    | Role     | Action   | Outcome |
+    | claimant | retrieve | succeed |
+    | claimant | update   | succeed |
+    | claimant | delete   | succeed |
+    | tenant   | retrieve | fail    |
+    | tenant   | update   | fail    |
+    | tenant   | delete   | fail    |
+
+  @performance
+  Scenario: Creating a claim under load
+    Given there are 100 concurrent users of the system
+    When they each create a claim
+    Then I expect page response times to remain under 200ms
+
+  @performance
+  Scenario: Retrieving a claim under load
+    Given there are 1000 concurent users of the system
+    When they all retrieve a claim
+    Then I expect page response times to remain under 5ms
