@@ -10,6 +10,67 @@ Feature: Social Landlord, Submit Claim, Step 1
     Then I expect to be redirected to the claim page
     And my details to be present on the page
 
+  Scenario: Create a new claim, property postcode lookup
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the postcode field in the Property section
+    And press the "Find UK address" button
+    Then I expect to see a dropdown menu
+    And the property address can be selected in the menu
+
+  Scenario: Create a new claim, address from property postcode
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the postcode field Property section
+    And press the "Fink UK address" button
+    Then I expect to see a dropdown menu
+    And the property address can be selected in the menu
+    
+  Scenario: Create a new claim, selecting a property postcode
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the Property section
+    And press the "Find UK address" button
+    And select "34 privet drive, London" from the dropdown
+    Then I expect to see "34 privet drive" in the Town field
+    And I expect to see "London" in the Town field
+
+  Scenario: Create a new claim, landlord postcode lookup
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the Landlord Details section
+    And press the "Find UK address" button
+    Then I expect to see a dropdown menu
+    And the landlord's address can be selected in the menu
+
+  Scenario: Create a new claim, address from landlord's postcode
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the Landlord section
+    And press the "Find UK address" button
+    And select "34 privet drive, London" from the dropdown
+    Then I expect to see "34 privet drive" in the Town field
+    And I expect to see "London" in the Town field
+    And I'm able to modify them    
+
+  Scenario: Create a new claim, enter a title number
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I click on "Would you like to provide a title number?"
+    Then I expect to see an input field appear 
+    That lets me enter a title number
+
+  Scenario: Create a new claim, enter DX in landlord address
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I click on "Would you like to provide a DX number?"
+    Then I expect to see two input fields appear
+    That lets me enter a DX number and a DX exchange
+
+
+
+    
+
   @validations
   Scenario Outline: Character length validation
     When I visit '/claims/new'
@@ -19,8 +80,24 @@ Feature: Social Landlord, Submit Claim, Step 1
     And return the <message>
 
     Examples:
-    | formitem | text | validate | message                                         |
-    | email    | abc  | fail     | Email address must be in format name@server.com |
+    | formitem       | text | validate | message                                         |
+    | landlord-email | abc  | fail     | Email address must be in format name@server.com |
+    | tenant-email   | abc  | fail     | Email address must be in format name@server.com |
+    | postcode       | abc  | fail     | This is not a valid postcode                    |
+
+  Scenario Outline: Radio buttons validation
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I click on "Continue to next step"
+    And I don't select any choice for <choice>
+    Then I expect it to fail
+    And return the <message>
+
+    Examples:
+    | choice                    | message                                    |
+    | "Who is in the Property?" | "You must indicate who is in the property" |
+    | "Address"                 | "You must indicate where the tenants are"  |
+
 
   @ia
   Scenario Outline: Access control
