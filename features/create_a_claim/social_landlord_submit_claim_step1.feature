@@ -14,7 +14,7 @@ Feature: Social Landlord, Submit Claim, Step 1
     Given I am logged as a Social Landlord
     And I visit the starting page of the claim form
     And I enter a valid postcode in the Property section
-    And press the "Fink UK address" button
+    And press the "Find UK address" button
     Then I expect to see a dropdown menu appear
     And the property address can be selected in the menu
 
