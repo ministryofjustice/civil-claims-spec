@@ -13,35 +13,44 @@ Feature: Social Landlord, Submit Claim, Step 1
   Scenario: Create a new claim, property postcode lookup
     Given I am logged as a Social Landlord
     And I visit the starting page of the claim form
-    And I enter a valid postcode in the Property section
+    And I enter "PA5 0PL" in the postcode field in the Property section
     And press the "Find UK address" button
-    Then I expect to see a dropdown menu appear
+    Then I expect to see a dropdown menu
     And the property address can be selected in the menu
 
   Scenario: Create a new claim, address from property postcode
     Given I am logged as a Social Landlord
     And I visit the starting page of the claim form
-    And I enter a valid postcode in the Property section
+    And I enter "PA5 0PL" in the postcode field Property section
     And press the "Fink UK address" button
-    And select the property address in the dropdown
-    Then I expect that the street address and town will be shown
-    And I'm able to modify them
+    Then I expect to see a dropdown menu
+    And the property address can be selected in the menu
+    
+  Scenario: Create a new claim, selecting a property postcode
+    Given I am logged as a Social Landlord
+    And I visit the starting page of the claim form
+    And I enter "PA5 0PL" in the Property section
+    And press the "Find UK address" button
+    And select "34 privet drive, London" from the dropdown
+    Then I expect to see "34 privet drive" in the Town field
+    And I expect to see "London" in the Town field
 
   Scenario: Create a new claim, landlord postcode lookup
     Given I am logged as a Social Landlord
     And I visit the starting page of the claim form
-    And I enter a valid postcode in the Landlord Details section
-    And press the "Fink UK address" button
-    Then I expect to see a dropdown menu appear
+    And I enter "PA5 0PL" in the Landlord Details section
+    And press the "Find UK address" button
+    Then I expect to see a dropdown menu
     And the landlord's address can be selected in the menu
 
   Scenario: Create a new claim, address from landlord's postcode
     Given I am logged as a Social Landlord
     And I visit the starting page of the claim form
-    And I enter a valid postcode in the Landlord section
-    And press the "Fink UK address" button
-    And select the landlord address in the drop-down
-    Then I expect that the street address and town will be shown
+    And I enter "PA5 0PL" in the Landlord section
+    And press the "Find UK address" button
+    And select "34 privet drive, London" from the dropdown
+    Then I expect to see "34 privet drive" in the Town field
+    And I expect to see "London" in the Town field
     And I'm able to modify them    
 
   Scenario: Create a new claim, enter a title number
