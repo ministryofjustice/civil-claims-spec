@@ -2,12 +2,15 @@ Feature: Social Landlord, Submit Claim, Step 1
 
   @happypath
   Scenario: Create a new claim, with personal details
-    Given I am logged in as a Social Landlord
-    When I visit '/claims/new'
-    And fill in the form with my personal details
-    And and no validation errors have occurred
+    Given I visit '/claims/new'
+    When fill in the form with my personal details
     And I click the 'Continue to next step' button
     Then I expect to be redirected to "/claims/:id/case_details"
+    And my personal details are persisted on the page at "/claims/:id/personal_details"
+
+  @o_javascript @wip
+  Scenario: With javascript disabled, the claim form is still valid
+    
 
   @javascript @wip
   Scenario: Create a new claim, selecting a property postcode

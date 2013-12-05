@@ -1,5 +1,3 @@
-
-
 def fill_in_property(property_data)
   within('.property-details') do
     fill_in 'Street',       with: property_data[:street]
@@ -16,22 +14,6 @@ def check_property_details(property_data)
   end
 end
 
-def fill_in_landlord(landlord_data)
-  within('.landlord-details') do
-    fill_in 'Council', with: landlord_data[:organisation_name]
-    fill_in 'Street', with: landlord_data[:street]
-    fill_in 'Town', with: landlord_data[:town ]
-    fill_in 'Postcode', with: landlord_data[:post_code]
-    fill_in 'Title', with: landlord_data[:title]
-    fill_in 'Full name', with: landlord_data[:full_name]
-    fill_in 'Phone', with: landlord_data[:phone]
-    fill_in 'Mobile', with: landlord_data[:mobile]
-    fill_in 'Email', with: landlord_data[:email]
-    fill_in 'DX number', with: landlord_data[:dx_number]
-    fill_in 'DX exchange', with: landlord_data[:dx_exchange]
-  end
-end
-
 def fill_in_tenant(tenant_data)
   within('#tenant-0') do
     fill_in 'Title', with: tenant_data[:title]
@@ -40,6 +22,18 @@ def fill_in_tenant(tenant_data)
     fill_in 'Email', with: tenant_data[:email]
     fill_in 'Street', with: tenant_data[:street]
     fill_in 'Town', with: tenant_data[:town ]
-    fill_in 'Postcode', with: tenant_data[:post_code]
+    fill_in 'Postcode', with: tenant_data[:postcode]
+  end
+end
+
+def check_tenant_details(tenant_data)
+  within('#tenant-0') do
+    expect(find_field('Title').value).to eql tenant_data[:title]
+    expect(find_field('Full name').value).to eql tenant_data[:full_name]
+    expect(find_field('Mobile').value).to eql tenant_data[:mobile]
+    expect(find_field('Email').value).to eql tenant_data[:email]
+    expect(find_field('Street').value).to eql tenant_data[:street]
+    expect(find_field('Town').value).to eql tenant_data[:town ]
+    expect(find_field('Postcode').value).to eql tenant_data[:postcode]
   end
 end
