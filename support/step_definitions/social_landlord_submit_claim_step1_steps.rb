@@ -3,7 +3,7 @@ Given(/^the site contains no claims$/) do
 end
 
 Given(/^I am logged in as a Social Landlord$/) do
-  # do nothing.
+  #pending
 end
 
 When(/^I visit '(.*)'$/) do |url|
@@ -17,33 +17,27 @@ When(/^fill in the form with my personal details$/) do
 end
 
 When(/^and no validation errors have occurred$/) do
-  # do nothing for now
+ # pending
 end
 
 When(/^I click the '(.*)' button$/) do |button_text|
   click_on button_text
 end
 
-Then(/^I expect to be redirected to the claim page$/) do
-  expect( current_url =~ /claims\/(\d+)/ ).to_not be nil
+Then(/^I expect to be redirected to "(.*?)"$/) do |path|
+  regex = Regexp.new path.gsub(':id', '(\d+)')
+  fail("Path mismatch. Expected #{path} but received #{current_url}") if !( current_url =~ regex ) 
 end
 
-Then(/^my details to be present on the page$/) do
-  check_property_details(Data.repossession_claim_property_details)
+
+Given(/^there are (\d+) concurrent users of the system$/) do |num_users|
+  pending # express the regexp above with the code you wish you had
 end
 
-When(/^I am filling in the step1 (.*)$/) do |formitem|
-  
+When(/^they each create a claim$/) do
+  pending # express the regexp above with the code you wish you had
 end
 
-When(/^I enter the (.*)$/) do |text|
-  
-end
-
-Then(/^I expect it to (.*)$/) do |outcome|
-  
-end
-
-Then(/^return the (.*)$/) do |message|
-  
+Then(/^I expect page response times to remain under (\d+)ms$/) do |response_time|
+  pending # express the regexp above with the code you wish you had
 end

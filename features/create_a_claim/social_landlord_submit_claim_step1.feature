@@ -7,8 +7,7 @@ Feature: Social Landlord, Submit Claim, Step 1
     And fill in the form with my personal details
     And and no validation errors have occurred
     And I click the 'Continue to next step' button
-    Then I expect to be redirected to "/claims/:id/edit/personal_details"
-    And the details I entered to have been saved
+    Then I expect to be redirected to "/claims/:id/case_details"
 
   @javascript @wip
   Scenario: Create a new claim, selecting a property postcode
@@ -50,13 +49,12 @@ Feature: Social Landlord, Submit Claim, Step 1
   @validations @wip
   Scenario Outline: Character length validation
     When I visit '/claims/new'
-    And I am filling in the step1 <formitem>
-    And I enter the <text>
+    And I enter <text> in the <formfield>
     Then I expect it to <validate>
     And return the <message>
 
     Examples:
-    | formitem       | text | validate | message                                         |
+    | formfield       | text | validate | message                                         |
     | landlord-email | abc  | fail     | Email address must be in format name@server.com |
     | tenant-email   | abc  | fail     | Email address must be in format name@server.com |
     | postcode       | abc  | fail     | This is not a valid postcode                    |

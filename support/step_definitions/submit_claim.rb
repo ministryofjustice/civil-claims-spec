@@ -4,17 +4,20 @@ def fill_in_property(property_data)
   within('.property-details') do
     fill_in 'Street',       with: property_data[:street]
     fill_in 'Town',         with: property_data[:town]
-    # fill_in 'Postcode',     with: property_data[:postcode]
+    fill_in 'Postcode',     with: property_data[:postcode]
     # check 'Residential'     if property_data[:residential]
     # check 'Commercial'      if property_data[:commercial]
     # choose                  property_data[:who_is_in_property]
-    # fill_in 'Title number', with: property_data[:title_number]
+     fill_in 'Title number', with: property_data[:title_number]
   end
 end
 
 def check_property_details(property_data)
   within('.property-details') do
     expect(find_field('Street').value).to eql property_data[:street]
+    expect(find_field('Town').value).to eql property_data[:town]
+    expect(find_field('Postcode').value).to eql property_data[:postcode]
+    expect(find_field('Title number').value).to eql property_data[:title_number]
   end
 end
 
