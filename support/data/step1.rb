@@ -1,7 +1,7 @@
 class Data
   def self.repossession_claim_landlord
     {
-      company: 'Bristol County Council',
+      organisation_name: 'Bristol County Council',
       street: '18 My Street',
       town: 'Bristol',
       postcode: 'N3 3LLC',
@@ -22,10 +22,6 @@ class Data
       street: '102 Petty France',
       town: 'Westminster',
       postcode: 'SW1H 9AJ',
-      residential: true,
-      commercial:  true,
-      who_is_in_property: 'tenants',
-      title_number: '1231123123'
     }
   end
 
