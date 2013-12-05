@@ -107,20 +107,27 @@ Feature: Social Landlord, Start a case, Personal details
     And that lets me enter address details manually
     When I enter text into the Postcode field I expect the inputted text to be validated
 
-
-
     @wip
-  Scenario: Start a new case, enter tenant's name
+  Scenario: Start a new case, enter tenant's mobile number
     Given I am logged in as a Social Landlord delegate
     And I visit the personal details page of the claim form
     When I am entering details about the tenant
-    And I enter the tenant's full name 
+    And I want to enter the tenant's contact telephone number 
     Then I expect to see an input field displayed
-    And that lets me enter the tenant's full name
-    And I expect to be able to enter as many characters as I like
-    Then I can see the tenant's name displayed
+    And that lets me enter the tenant's contact telephone number
+    And validates the inputted characters after they are entered so that they display the correct pattern for a UK telephone number (mobile or landline)
+    Then I can see the tenant's contact telephone number displayed formatted correctly
 
-
+ @wip
+  Scenario: Start a new case, enter tenant's email address
+    Given I am logged in as a Social Landlord delegate
+    And I visit the personal details page of the claim form
+    When I am entering details about the tenant
+    And I want to enter the tenant's email address 
+    Then I expect to see an input field displayed
+    And that lets me enter the tenant's email address
+    And validates the inputted characters after they are entered so that they display the correct pattern for an email address
+    Then I can see the tenant's email address displayed formatted correctly
 
   @validations @wip
   Scenario Outline: Character length validation
