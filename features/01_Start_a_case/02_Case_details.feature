@@ -1,83 +1,175 @@
-Feature: Social Landlord, Submit Claim, Step 1
+Feature: Social Landlord, Start a case, Case details
 
-  @happypath
-  Scenario: Create a new claim, with personal details
-    Given I am logged in as a Social Landlord
-    When I visit '/claims/new'
-    And fill in the form with my personal details
-    And and no validation errors have occurred
-    And I click the 'Continue to next step' button
-    Then I expect to be redirected to "/claims/:id/edit/personal_details"
+    @happypath
+    Scenario: Start a new case, with case details
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I confirm the details of the tenancy
+    And I enter the details about the case and any further information 
+    And I click the "Continue to next step" button
+    Then I expect to be redirected to "/claims/:id/edit/check_details"
     And the details I entered to have been saved
 
-  @javascript @wip
-  Scenario: Create a new claim, selecting a property postcode
-    Given I am logged as a Social Landlord
-    And I visit the starting page of the claim form
-    And I enter "PA5 0PL" in the Property section
-    And press the "Find UK address" button
-    And select "34 privet drive, London" from the dropdown
-    Then I expect to see "34 privet drive" in the Town field
-    And I expect to see "London" in the Town field
+    @wip
+    Scenario: Start a new case, selecting tenancy type
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select the tenancy type
+    Then I expect to see a list of options as radio buttons
+    And I expect to see the "Secure tenancy" radio button pre-selected
+    And when I select any other radio button
+    And I expect to see that option selected
 
-  @javascript @wip
-  Scenario: Create a new claim, address from landlord's postcode
-    Given I am logged as a Social Landlord
-    And I visit the starting page of the claim form
-    And I enter "PA5 0PL" in the Landlord section
-    And press the "Find UK address" button
-    And select "34 privet drive, London" from the dropdown
-    Then I expect to see "34 privet drive" in the Town field
-    And I expect to see "London" in the Town field
-    And I'm able to modify them    
+    @wip
+    Scenario: Start a new case, selecting tenancy start date
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select the tenancy start date
+    Then I expect to see a dropdown for "day" for "month" for "year"
+    And I expect when selecting "day" to be displayed a dropdown with 31 days
+    And I expect when selecting "month" to be displayed a dropdown with the 12 months
+    And I expect when selecting "year" to be displayed a dropdown with the current year at the top of the list and a list of years back to 1990
+    And depending on which "month" I select I expect the "day" dropdown to display the correct number of calendar days
+    And I expect when selecting a leap "year" to be displayed the correct number of calendar "days" in "month" of February 
 
-  @wip
-  Scenario: Create a new claim, enter a title number
-    Given I am logged as a Social Landlord
-    And I visit the starting page of the claim form
-    And I click on "Would you like to provide a title number?"
-    Then I expect to see an input field appear 
-    And that lets me enter a title number
+    @wip
+    Scenario: Start a new case, inputting rent amount
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select Rent amount
+    Then I expect to see displayed a text input field
+    And when I input numerals into the field I expect them to be displayed back to me in the correct format
+    And I expect to see displayed a dropdown with "per week" or "per month"
+    And I expect to see "per week" as the default selection
 
-  @wip
-  Scenario: Create a new claim, enter DX in landlord address
-    Given I am logged as a Social Landlord
-    And I visit the starting page of the claim form
-    And I click on "Would you like to provide a DX number?"
-    Then I expect to see two input fields appear
-    And that lets me enter a DX number and a DX exchange
+    @wip
+    Scenario: Start a new case, inputting daily rent amount
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select Daily Rent amount
+    Then I expect to see displayed a text input field
+    And when I input numerals into the field I expect them to be displayed back to me in the correct format
 
-  @validations @wip
-  Scenario Outline: Character length validation
-    When I visit '/claims/new'
-    And I am filling in the step1 <formitem>
+     @wip
+    Scenario: Start a new case, selecting notices sent
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select the notices served
+    Then I expect to see a list of options as radio buttons
+    And when I select a radio button
+    And I expect to see a date picker persistently displayed for the selected option
+
+     @wip
+    Scenario: Start a new case, selecting date for when a notice is sent
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select the notices served
+    And I select a notice type
+    And I expect to see a date picker persistently displayed for the selected option
+    Then I expect to see a dropdown for "day" for "month" for "year"
+    And I expect when selecting "day" to be displayed a dropdown with 31 days
+    And I expect when selecting "month" to be displayed a dropdown with the 12 months
+    And I expect when selecting "year" to be displayed a dropdown with the current year at the top of the list and a list of years back to 1990
+    And depending on which "month" I select I expect the "day" dropdown to display the correct number of calendar days
+    And I expect when selecting a leap "year" to be displayed the correct number of calendar "days" in "month" of February
+
+    @wip
+    Scenario: Start a new case, inputting total unpaid rent
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select Total unpaid rent
+    Then I expect to see displayed a text input field
+    And when I input numerals into the field I expect them to be displayed back to me in the correct format
+
+    @wip
+    Scenario: Start a new case, further information
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select Further information
+    Then I expect to see displayed a resizable text input field
+    And when I input text into the field I expect the text to be displayed back to me
+    And when I resize the text input field I expect the text to realign
+
+    @wip
+    Scenario: Start a new case, Human Rights Act
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I select The case includes issues under the Human Rights Act 1998
+    Then I expect to see displayed a non selected tick box
+    And when I select the tick box I expect the tick box to be displayed as selected
+
+    @validations @wip
+    Scenario Outline: Numeral input validation
+    When I visit "/claims/new"
+    And I am filling in the claim details <formitem>
     And I enter the <text>
     Then I expect it to <validate>
     And return the <message>
 
     Examples:
-    | formitem       | text | validate | message                                         |
-    | landlord-email | abc  | fail     | Email address must be in format name@server.com |
-    | tenant-email   | abc  | fail     | Email address must be in format name@server.com |
-    | postcode       | abc  | fail     | This is not a valid postcode                    |
+    | formitem          | text | validate | message                 |
+    | rent amount       | abc  | fail     | Numerals only           |
+    | daily rent amount | abc  | fail     | Numerals only           |
+    | total unpaid rent | abc  | fail     | Numerals only           |
 
-  @wip
-  Scenario Outline: Radio buttons validation
-    Given I am logged as a Social Landlord
-    And I visit the starting page of the claim form
+    @validations @wip
+    Scenario Outline: numeral length validation
+    When I visit "/claims/new"
+    And I am filling in the claim details <formitem>
+    And I enter the <text>
+    Then I expect it to <validate>
+    And return the <message>
+
+    Examples:
+    | formitem          | text        | validate | message                   |
+    | rent amount       | 1234567890  | fail     | Rent amount seems too big |
+    | daily rent amount | 1234567890  | fail     | Rent amount seems too big |
+    | total unpaid rent | 1234567890  | fail     | Rent amount seems too big |
+
+     @validations @wip
+    Scenario Outline: numeral validation
+    When I visit "/claims/new"
+    And I am filling in the claim details <formitem>
+    And I enter the <text>
+    Then I expect it to <validate>
+    And return the <message>
+
+    Examples:
+    | formitem          | text  | validate | message                          |
+    | rent amount       | 0123  | fail     | Rent amounts cannot start with 0 |
+    | daily rent amount | 0123  | fail     | Rent amounts cannot start with 0 |
+    | total unpaid rent | 0123  | fail     | Rent amounts cannot start with 0 |
+
+     @validations @wip
+    Scenario Outline: numeral amount validation
+    When I visit "/claims/new"
+    And I am filling in the claim details <formitem>
+    And I enter the <text>
+    Then I expect it to <validate>
+    And return the <message>
+
+    Examples:
+    | formitem                                 | text | validate | message                                            |
+    | daily rent amount related to rent amount | 123  | fail     | Daily rent amount cannot be higher than "x" amount |
+
+    @wip
+    Scenario Outline: Radio buttons validation
+    Given I am logged as a Social Landlord delegate
+    And I visit the case details page of the claim form
     And I click on "Continue to next step"
     And I don't select any choice for <choice>
     Then I expect it to fail
     And return the <message>
 
     Examples:
-    | choice                    | message                                    |
-    | "Who is in the Property?" | "You must indicate who is in the property" |
-    | "Address"                 | "You must indicate where the tenants are"  |
+    | choice                  | message                                  |
+    | Tenancy start date      | You must indicate tenancy start date     |
+    | Rent amount             | You must indicate the rent amount        |
+    | Daily rent amount       | You must indicate the daily rent amount  |
+    | Total unpaid rent       | You must indicate the total unpaid rent  |
 
-
-  @ia @wip
-  Scenario Outline: Access control
+    @ia @wip
+    Scenario Outline: Access control
     Given a new claim with a Property, Landlord and Tenant
     And I authenticate as a <Role>
     When I try to <Action> this claim
@@ -103,3 +195,4 @@ Feature: Social Landlord, Submit Claim, Step 1
     Given there are 1000 concurent users of the system
     When they all retrieve a claim
     Then I expect page response times to remain under 5ms
+    
