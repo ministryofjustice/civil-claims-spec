@@ -13,121 +13,122 @@ Feature: Social Landlord, Start a case, Personal details
   @javascript @wip
   Scenario: Start a new case, selecting a property postcode
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
+    When I visit "/claims/new"
     And I enter "PA5 0PL" in the Property section
     And press the "Find UK address" button
-    And select "34 privet drive, London" from the dropdown
-    Then I expect to see "34 privet drive" in the Street field
+    And select "34 Privet Drive, London" from the dropdown
+    Then I expect to see "34 Privet Drive" in the Street field
     And I expect to see "London" in the Town field
 
    @wip
   Scenario: Start a new case, entering an address manually
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details of the tenant's property
+    When I visit "/claims/new"
+    And I enter details of the tenant's property
     And I click on "Enter address manually"
-    Then I expect to see input fields appear for Street, Town, Postcode 
+    Then I expect to see input fields appear for Street, Town, Postcode
     And that lets me enter address details manually
-    When I enter text into the Postcode field I expect the inputted text to be validated
+    And I expect to see the words "34 Privet Drive" in the Street input field
+    And I expect to see the word "London" in the Town input field
+    And I expect to see the letters "PA5 0PL" in the Postcode input field
+    And when I enter text into the Postcode field I expect the inputted text to be validated
 
   @javascript @wip
   Scenario: Start a new case, confirm claimant's address and contact details
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
+    When I visit "/claims/new"
     And I confirm that the displayed details of the claimant are correct
-    And I expect to see the correct Social Landlord name
-    And I expect to see the correct contact address (including street and postcode)
-    And I expect to see the correct name of the Social Landlord delegate
-    Given that they are not correct or I would like to update the details
-    Then I will need to contact the admin of my organisation to update the details  
+    Then I expect to see the correct Social Landlord name
+    Then I expect to see the correct contact address (including street and postcode)
+    Then I expect to see the correct name of the Social Landlord delegate 
 
   @wip
   Scenario: Start a new case, enter a Land Registry title number
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details of the tenant's property
+    When I visit "/claims/new"
+    And I enter details of the tenant's property
     And I click on "Would you like to provide a title number?"
     Then I expect to see an input field appear 
     And that lets me enter a title number
-    Then I can validate title number on Land Registry database
+    And I can validate title number on Land Registry database
 
     @wip
   Scenario: Start a new case, enter how many tenants there are in the property
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I click on "You're taking court action against"
-    Then I expect to be able to select numerals up to '4' 
+    Then I expect to be able to select numerals up to 4 
     And that lets me enter a number of tenants in the property
-    Then I can see the number of tenants displayed
+    And I can see the number of tenants displayed
 
      @wip
   Scenario: Start a new case, enter tenant's title
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I click on "Title"
     Then I expect to be able to select a title (eg Mr, Ms etc) from a dropdown list
     And that lets me enter the tenant's title
-    Then I can see the tenant's title displayed
+    And I can see the tenant's title displayed
 
      @wip
   Scenario: Start a new case, enter tenant's name
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I enter the tenant's full name 
     Then I expect to see an input field displayed
     And that lets me enter the tenant's full name
     And I expect to be able to enter as many characters as I like
-    Then I can see the tenant's name displayed
+    And I can see the tenant's name displayed
 
     @wip
   Scenario: Start a new case, confirm whether they are living in the property or not
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I confirm whether the tenant is living in the property in question or not 
     Then I expect to see two radio buttons displayed
     And that lets me select either "Yes" or "No"
     And I expect when I select either for the radio button to be displayed as Selected
-    When I select "Yes" I expect there no be no change to the display of the page
-    When I select "No" I expect to be displayed a postcode input field
-    When I select "No" I expect to be displayed an enter address manually
+    And I select "Yes" I expect there no be no change to the display of the page
+    And I select "No" I expect to be displayed a postcode input field
+    And I select "No" I expect to be displayed an enter address manually
 
     @wip
   Scenario: Start a new case, confirm whether they are living in the property or not
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I confirm whether the tenant is living in the property in question or not
-    When I select "No" I expect to be able to enter an address manually
-    When I click on "Enter address manually"
+    And I select "No" I expect to be able to enter an address manually
+    And I click on "Enter address manually"
     Then I expect to see input fields appear for Street, Town, Postcode 
     And that lets me enter address details manually
-    When I enter text into the Postcode field I expect the inputted text to be validated
+    And I enter text into the Postcode field I expect the inputted text to be validated
 
     @wip
   Scenario: Start a new case, enter tenant's mobile number
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I want to enter the tenant's contact telephone number 
     Then I expect to see an input field displayed
     And that lets me enter the tenant's contact telephone number
     And validates the inputted characters after they are entered so that they display the correct pattern for a UK telephone number (mobile or landline)
-    Then I can see the tenant's contact telephone number displayed formatted correctly
+    And I can see the tenant's contact telephone number displayed formatted correctly
 
  @wip
   Scenario: Start a new case, enter tenant's email address
     Given I am logged in as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    When I am entering details about the tenant
+    When I visit "/claims/new"
+    And I enter details about the tenant
     And I want to enter the tenant's email address 
     Then I expect to see an input field displayed
     And that lets me enter the tenant's email address
     And validates the inputted characters after they are entered so that they display the correct pattern for an email address
-    Then I can see the tenant's email address displayed formatted correctly
+    And I can see the tenant's email address displayed formatted correctly
 
   @validations @wip
   Scenario Outline: Character length validation
