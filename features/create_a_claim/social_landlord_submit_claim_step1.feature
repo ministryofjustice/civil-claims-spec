@@ -8,10 +8,6 @@ Feature: Social Landlord, Submit Claim, Step 1
     Then I expect to be redirected to "/claims/:id/case_details"
     And my personal details are persisted on the page at "/claims/:id/personal_details"
 
-  @o_javascript @wip
-  Scenario: With javascript disabled, the claim form is still valid
-    
-
   @javascript @wip
   Scenario: Create a new claim, selecting a property postcode
     Given I am logged as a Social Landlord
