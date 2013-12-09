@@ -7,3 +7,5 @@ gem 'hashie'
 gem "poltergeist"
 gem 'rspec'
 gem 'guard-cucumber'
+gem 'selenium-webdriver' 
+gem 'ruby-jmeter'
