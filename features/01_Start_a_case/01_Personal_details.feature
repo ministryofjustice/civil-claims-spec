@@ -5,10 +5,80 @@ Feature: Social Landlord, Start a case, Personal details
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
     And confirm that my pre-filled personal business details are correct
-    And I enter the details of the tenant
+    And I enter valid details for the property
+    And I enter valid details for at least one tenant
     And I click the "Continue to next step" button
-    Then I expect to be redirected to "/claims/:id/edit/case_details"
-    And the details I entered to have been saved
+    Then I expect to be redirected to "/claims/:id/case_details"
+    And the details I entered to have been saved on "/claims/:id/personal_details"
+
+  @validations @wip
+  Scenario Outline: Required fields
+    When I visit "/claims/new"
+    And I enter valid details for everything except <form_field>
+    Then I expect form validation to fail
+    And return the <message>
+
+    Examples:
+    | form_field     | message                                         |
+    | tenant-email   | Email address must be in format name@server.com |
+    | postcode       | Missing postcode!                               |
+
+  @validations @wip
+  Scenario Outline: Character length validation
+    When I visit "/claims/new"
+    And I am filling in the personal details <formitem>
+    And I enter a value with <number_of_characters> characters
+    Then I expect it to <validate>
+    And return the <message>
+
+    Examples:
+    | formitem          | number_of_characters   | validate | message                                         |
+    | tenant-email      | 3                      | fail     | Email address must be in format name@server.com |
+    | postcode          | 10                     | fail     | This is not a valid postcode                    |
+    | tenants full name | 50                     | pass     |                                                 |
+
+  @validations @wip
+  Scenario Outline: Radio buttons validation
+    Given I am logged as a Social Landlord delegate
+    And I visit the personal details page of the claim form
+    And I click on "Continue to next step"
+    And I don't select any choice for <choice>
+    Then I expect it to fail
+    And return the <message>
+
+    Examples:
+    | choice                    | message                                    |
+    | "Who is in the Property?" | "You must indicate who is in the property" |
+    | "Address"                 | "You must indicate where the tenants are"  |
+
+  @ia @unhappypath
+  Scenario Outline: Malicious User Input filter
+    Given I am a valid user
+    And I visit "/claims/new"
+    When I enter <dubious_text> into every form field
+    And I click the "Continue to next step" button
+    Then I expect to display the <standard_validation> error
+
+    Examples:
+    | dubious_text  | form_field | standard_validation                 |
+    | XSS w/ alert  | address    | 
+    | sql_injection | ... etc    |
+
+  @ia @wip
+  Scenario Outline: Access control
+    Given a new claim with a Property, Claimant and Tenant
+    And I authenticate as a <Role>
+    When I try to <Action> this claim
+    Then I expect my request to <Outcome>
+
+    Examples:
+    | Role     | Action   | Outcome |
+    | claimant | retrieve | succeed |
+    | claimant | update   | succeed |
+    | claimant | delete   | succeed |
+    | tenant   | retrieve | fail    |
+    | tenant   | update   | fail    |
+    | tenant   | delete   | fail    |
 
   @javascript @wip
   Scenario: Start a new case, selecting a property postcode
@@ -20,7 +90,7 @@ Feature: Social Landlord, Start a case, Personal details
     Then I expect to see "34 Privet Drive" in the Street field
     And I expect to see "London" in the Town field
 
-   @wip
+  @javascript @wip
   Scenario: Start a new case, entering an address manually
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
@@ -42,7 +112,7 @@ Feature: Social Landlord, Start a case, Personal details
     Then I expect to see the correct contact address (including street and postcode)
     Then I expect to see the correct name of the Social Landlord delegate 
 
-  @wip
+  @javascript @wip
   Scenario: Start a new case, enter a Land Registry title number
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
@@ -52,7 +122,7 @@ Feature: Social Landlord, Start a case, Personal details
     And that lets me enter a title number
     And I can validate title number on Land Registry database
 
-    @wip
+  @javascript @wip
   Scenario: Start a new case, enter how many tenants there are in the property
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
@@ -62,26 +132,12 @@ Feature: Social Landlord, Start a case, Personal details
     And that lets me enter a number of tenants in the property
     And I can see the number of tenants displayed
 
-     @wip
+  @wip
   Scenario: Start a new case, enter tenant's title
-    Given I am logged in as a Social Landlord delegate
+    Given I am authorised
     When I visit "/claims/new"
-    And I enter details about the tenant
     And I click on "Title"
-    Then I expect to be able to select a title (eg Mr, Ms etc) from a dropdown list
-    And that lets me enter the tenant's title
-    And I can see the tenant's title displayed
-
-     @wip
-  Scenario: Start a new case, enter tenant's name
-    Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I enter details about the tenant
-    And I enter the tenant's full name 
-    Then I expect to see an input field displayed
-    And that lets me enter the tenant's full name
-    And I expect to be able to enter as many characters as I like
-    And I can see the tenant's name displayed
+    Then I expect to be able to see the following options in the drop down list: [Mr, Mrs, Miss, Dr, Sargent, ...]
 
     @wip
   Scenario: Start a new case, confirm whether they are living in the property or not
@@ -136,52 +192,9 @@ Feature: Social Landlord, Start a case, Personal details
     When I visit "/claims/new"
     And I enter/make changes to details on the page
     And I select "Save and come back later" 
-    Then I expect the page to close and to save all changes on "/claims/:id/edit/personal_details"
+    Then I expect the page to close and to save all changes on "/claims/:id/personal_details"
     And I expect "/your_claims/" to be displayed
 
-  @validations @wip
-  Scenario Outline: Character length validation
-    When I visit "/claims/new"
-    And I am filling in the personal details <formitem>
-    And I enter the <text>
-    Then I expect it to <validate>
-    And return the <message>
-
-    Examples:
-    | formitem       | text | validate | message                                         |
-    | tenant-email   | abc  | fail     | Email address must be in format name@server.com |
-    | postcode       | abc  | fail     | This is not a valid postcode                    |
-
-  @wip
-  Scenario Outline: Radio buttons validation
-    Given I am logged as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    And I click on "Continue to next step"
-    And I don't select any choice for <choice>
-    Then I expect it to fail
-    And return the <message>
-
-    Examples:
-    | choice                    | message                                    |
-    | "Who is in the Property?" | "You must indicate who is in the property" |
-    | "Address"                 | "You must indicate where the tenants are"  |
-
-
-  @ia @wip
-  Scenario Outline: Access control
-    Given a new claim with a Property, Landlord and Tenant
-    And I authenticate as a <Role>
-    When I try to <Action> this claim
-    Then I expect my request to <Outcome>
-
-    Examples:
-    | Role     | Action   | Outcome |
-    | claimant | retrieve | succeed |
-    | claimant | update   | succeed |
-    | claimant | delete   | succeed |
-    | tenant   | retrieve | fail    |
-    | tenant   | update   | fail    |
-    | tenant   | delete   | fail    |
 
   @performance @wip
   Scenario: Creating a claim under load
