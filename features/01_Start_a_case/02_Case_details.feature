@@ -98,6 +98,15 @@ Feature: Social Landlord, Start a case, Case details
     Then I expect to see displayed a non selected tick box
     And when I select the tick box I expect the tick box to be displayed as selected
 
+    @wip
+  Scenario: Start a new case, save and come back later
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I enter/make changes to details on the page
+    And I select "Save and come back later" 
+    Then I expect the page to close and to save all changes on "/claims/:id/edit/case_details"
+    And I expect "/your_claims/" to be displayed
+
     @validations @wip
     Scenario Outline: Numeral input validation
     When I visit "/claims/new"

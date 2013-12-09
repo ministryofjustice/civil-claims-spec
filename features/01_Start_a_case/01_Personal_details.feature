@@ -130,6 +130,15 @@ Feature: Social Landlord, Start a case, Personal details
     And validates the inputted characters after they are entered so that they display the correct pattern for an email address
     And I can see the tenant's email address displayed formatted correctly
 
+    @wip
+  Scenario: Start a new case, save and come back later
+    Given I am logged in as a Social Landlord delegate
+    When I visit "/claims/new"
+    And I enter/make changes to details on the page
+    And I select "Save and come back later" 
+    Then I expect the page to close and to save all changes on "/claims/:id/edit/personal_details"
+    And I expect "/your_claims/" to be displayed
+
   @validations @wip
   Scenario Outline: Character length validation
     When I visit "/claims/new"
