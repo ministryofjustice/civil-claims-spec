@@ -25,8 +25,8 @@ Feature: Social Landlord, Submit Claim, Step 3
     Then I expect to be on the <url> page
 
   Examples:
-  | section           | url                                   |
-  | Property details  | /claims/:id/personal_details#property |
-  | Tenant details    | /claims/:id/personal_details#tenants  |
-  | About the case    | /claims/:id/case_details#about        |
+  | section           | url                                      |
+  | Property details  | /claims/:id/personal_details#property    |
+  | Tenant details    | /claims/:id/personal_details#tenants     |
+  | About the case    | /claims/:id/case_details#about           |
   | About the tenancy | /claims/:id/case_details#about..whatever |
