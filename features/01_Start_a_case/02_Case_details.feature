@@ -1,14 +1,14 @@
 Feature: Social Landlord, Start a case, Case details
 
     @happypath
-    Scenario: Start a new case, with case details
+    Scenario: Enter case details, new case
     Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I confirm the details of the tenancy
-    And I enter the details about the case and any further information 
+    And I have started a new claim, and filled in some valid personal_details
+    And I visit '/claims/:id/case_details'
+    When I fill in the form with valid details
     And I click the "Continue to next step" button
-    Then I expect to be redirected to "/claims/:id/edit/check_details"
-    And the details I entered to have been saved
+    Then I expect to be redirected to "/claims/:id/check_details"
+    And the details I entered to have been saved on "/claims/:id/case_details"
 
     @wip
     Scenario: Start a new case, selecting tenancy type
@@ -23,14 +23,12 @@ Feature: Social Landlord, Start a case, Case details
     @wip
     Scenario: Start a new case, selecting tenancy start date
     Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I select the tenancy start date
+    And I have started a new claim, and filled in some valid personal_details
+    And I visit "/claims/:id/case_details"
     Then I expect to see a dropdown for "day" for "month" for "year"
     And I expect when selecting "day" to be displayed a dropdown with 31 days
     And I expect when selecting "month" to be displayed a dropdown with the 12 months
-    And I expect when selecting "year" to be displayed a dropdown with the current year at the top of the list and a list of years back to 1990
-    And depending on which "month" I select I expect the "day" dropdown to display the correct number of calendar days
-    And I expect when selecting a leap "year" to be displayed the correct number of calendar "days" in "month" of February 
+    And I expect when selecting "year" to be displayed a dropdown with the current year at the top of the list and a list of years back to "1932"
 
     @wip
     Scenario: Start a new case, inputting rent amount
@@ -97,15 +95,6 @@ Feature: Social Landlord, Start a case, Case details
     And I select The case includes issues under the Human Rights Act 1998
     Then I expect to see displayed a non selected tick box
     And when I select the tick box I expect the tick box to be displayed as selected
-
-    @wip
-  Scenario: Start a new case, save and come back later
-    Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I enter/make changes to details on the page
-    And I select "Save and come back later" 
-    Then I expect the page to close and to save all changes on "/claims/:id/edit/case_details"
-    And I expect "/your_claims/" to be displayed
 
     @validations @wip
     Scenario Outline: Numeral input validation

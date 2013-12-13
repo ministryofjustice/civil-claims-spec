@@ -18,7 +18,7 @@ Feature: Social Landlord, Submit Claim, Step 3
     And an error is displayed on "/claims/:id/court_fees"
 
   @wip
-  Scenario: Make changes to previously added details
+  Scenario Outline: Make changes to previously added details
     Given I have created a claim
     And I visit "/claims/:id/check_details"
     When I click the Make Changes link next to the <section>

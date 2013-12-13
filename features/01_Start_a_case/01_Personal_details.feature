@@ -3,7 +3,7 @@ Feature: Social Landlord, Start a case, Personal details
   @happypath
   Scenario: Start a new case, with personal details
     Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
+    When I visit '/claims/new'
     And confirm that my pre-filled personal business details are correct
     And I enter valid details for the property
     And I enter valid details for at least one tenant
@@ -51,18 +51,6 @@ Feature: Social Landlord, Start a case, Personal details
     | "Who is in the Property?" | "You must indicate who is in the property" |
     | "Address"                 | "You must indicate where the tenants are"  |
 
-  @ia @unhappypath
-  Scenario Outline: Malicious User Input filter
-    Given I am a valid user
-    And I visit "/claims/new"
-    When I enter <dubious_text> into every form field
-    And I click the "Continue to next step" button
-    Then I expect to display the <standard_validation> error
-
-    Examples:
-    | dubious_text  | form_field | standard_validation                 |
-    | XSS w/ alert  | address    | 
-    | sql_injection | ... etc    |
 
   @ia @wip
   Scenario Outline: Access control

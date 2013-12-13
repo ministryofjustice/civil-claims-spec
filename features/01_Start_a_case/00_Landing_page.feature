@@ -1,6 +1,6 @@
 Feature: Social Landlord, Start a Case, Landing Page
 
-  @happypath
+  @happypath @wip
   Scenario: Start a new claim
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new" 
