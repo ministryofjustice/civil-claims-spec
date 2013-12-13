@@ -1,4 +1,14 @@
- When(/^I visit '(.*)'$/) do |path|
+Given(/^I am logged in as a Social Landlord delegate$/) do
+  # does nothing, auth is feature flagged off for now
+end
+
+Given(/^I have started a new claim, and filled in some valid personal_details$/) do
+  step "I visit '/claim/new'"
+  step "fill in the form with my personal details"
+  step "I click the 'Continue to next step' button"
+end
+
+When(/^I visit '(.*)'$/) do |path|
   visit path
 end
 
