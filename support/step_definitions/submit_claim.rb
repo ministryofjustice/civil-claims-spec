@@ -37,3 +37,12 @@ def check_tenant_details(tenant_data)
     expect(find_field('Postcode').value).to eql tenant_data[:postcode]
   end
 end
+
+def check_landlord_details(landlord_data)
+  within('#council') do
+    expect(page).to have_content(landlord_data[:organisation_name])
+    expect(page).to have_content(landlord_data[:full_name])
+    expect(page).to have_content(landlord_data[:phone])
+    expect(page).to have_content(landlord_data[:email])
+  end
+end

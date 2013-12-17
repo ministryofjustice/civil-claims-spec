@@ -3,8 +3,9 @@ Given(/^I am logged in as a Social Landlord delegate$/) do
 end
 
 Given(/^I have started a new claim, and filled in some valid personal_details$/) do
-  step "I visit '/claim/new'"
-  step "fill in the form with my personal details"
+  step "I visit '/claims/new'"
+  step "I enter valid details for the property"
+  step "I enter valid details for at least one tenant"
   step "I click the 'Continue to next step' button"
 end
 
@@ -12,16 +13,11 @@ When(/^I visit '(.*)'$/) do |path|
   visit path
 end
 
-When(/^fill in the form with my personal details$/) do
-  fill_in_property(Data.repossession_claim_property_details)
-  fill_in_tenant(Data.repossession_claim_tenant)
-end
-
 When(/^I click the '(.*)' button$/) do |button_text|
   click_on button_text
 end
 
-Then(/^I expect to be redirected to "(.*?)"$/) do |path|
+Then(/^I expect to be redirected to '(.*?)'$/) do |path|
   /(\d+)/.match(current_path) { |m| @id = m[1] }
   regex = Regexp.new path.gsub(':id', '(\d+)')
   fail("Path mismatch. Expected #{path} but received #{current_url}") if !( current_url =~ regex ) 
@@ -42,5 +38,25 @@ When(/^they each create a claim$/) do
 end
 
 Then(/^I expect page response times to remain under (\d+)ms$/) do |response_time|
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^confirm that my pre\-filled personal business details are correct$/) do
+  check_landlord_details(Data.repossession_claim_landlord)
+end
+
+When(/^I enter valid details for the property$/) do
+  fill_in_property(Data.repossession_claim_property_details)
+end
+
+When(/^I enter valid details for at least one tenant$/) do
+  fill_in_tenant(Data.repossession_claim_tenant)
+end
+
+When(/^I fill in the form with valid details$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^the details I entered to have been saved on "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end

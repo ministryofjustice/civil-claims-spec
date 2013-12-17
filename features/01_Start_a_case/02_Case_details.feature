@@ -6,9 +6,9 @@ Feature: Social Landlord, Start a case, Case details
     And I have started a new claim, and filled in some valid personal_details
     And I visit '/claims/:id/case_details'
     When I fill in the form with valid details
-    And I click the "Continue to next step" button
-    Then I expect to be redirected to "/claims/:id/check_details"
-    And the details I entered to have been saved on "/claims/:id/case_details"
+    And I click the 'Continue to next step' button
+    Then I expect to be redirected to '/claims/:id/check_details'
+    And the details I entered to have been saved on '/claims/:id/case_details'
 
     @wip
     Scenario: Start a new case, selecting tenancy type

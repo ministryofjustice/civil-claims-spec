@@ -1,19 +1,10 @@
 class Data
   def self.repossession_claim_landlord
     {
-      organisation_name: 'Bristol County Council',
-      street: '18 My Street',
-      town: 'Bristol',
-      postcode: 'N3 3LLC',
-
-      title: 'Mr',
-      full_name: 'Thomas Brown',
-      phone: '0919239872 34',
-      mobile: '234234234234',
-      email: 'my@example.com',
-
-      dx_number: '123',
-      dx_exchange: 'bristol'
+      organisation_name: 'Bristol City Council',
+      full_name: 'Bob Hoskins',
+      phone: '123456567',
+      email: 'bob.hoskins@example.com'
     }
   end
 

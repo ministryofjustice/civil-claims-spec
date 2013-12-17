@@ -7,8 +7,8 @@ Feature: Social Landlord, Start a case, Personal details
     And confirm that my pre-filled personal business details are correct
     And I enter valid details for the property
     And I enter valid details for at least one tenant
-    And I click the "Continue to next step" button
-    Then I expect to be redirected to "/claims/:id/case_details"
+    And I click the 'Continue to next step' button
+    Then I expect to be redirected to '/claims/:id/case_details'
     And my personal details are persisted on the page at "/claims/:id/personal_details"
 
   @validations @wip
