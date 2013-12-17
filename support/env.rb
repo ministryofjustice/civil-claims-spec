@@ -36,5 +36,5 @@ Capybara.app_host = CONFIG.base_url
 
 # Capybara.default_driver = :firefox_with_proxy
 # Capybara.default_driver = :firefox_with_no_javascript
-Capybara.default_driver = :poltergeist
-#Capybara.default_driver = :selenium
+# Capybara.default_driver = :poltergeist
+Capybara.default_driver = :selenium
