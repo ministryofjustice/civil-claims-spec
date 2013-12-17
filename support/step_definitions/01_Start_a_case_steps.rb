@@ -53,8 +53,8 @@ When(/^I enter valid details for at least one tenant$/) do
   fill_in_tenant(Data.repossession_claim_tenant)
 end
 
-When(/^I fill in the form with valid details$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I fill in some valid case_details$/) do
+  fill_in_case(Data.repossession_claim_case)
 end
 
 Then(/^the details I entered to have been saved on "(.*?)"$/) do |arg1|
