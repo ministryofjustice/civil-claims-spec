@@ -69,3 +69,7 @@ def fill_in_case(case_data)
   fill_in 'further-info', with: case_data[:further_info]
   check('human-rights')
 end
+
+def check_case_details_state
+  find_field('tenancy_type_secure_tenancy').should be_checked
+end
