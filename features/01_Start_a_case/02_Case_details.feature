@@ -3,9 +3,11 @@ Feature: Social Landlord, Start a case, Case details
     @happypath
     Scenario: Enter case details, new case
     Given I am logged in as a Social Landlord delegate
-    And I have started a new claim, and filled in some valid personal_details
-    And I visit '/claims/:id/case_details'
-    When I fill in the form with valid details
+    And I visit '/claims/new'
+    And I enter valid details for the property
+    And I enter valid details for at least one tenant
+    And I click the 'Continue to next step' button
+    When I fill in some valid case_details
     And I click the 'Continue to next step' button
     Then I expect to be redirected to '/claims/:id/check_details'
     And the details I entered to have been saved on '/claims/:id/case_details'
