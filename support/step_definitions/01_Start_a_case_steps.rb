@@ -61,6 +61,6 @@ Then(/^the details I entered to have been saved on "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Then(/^I expect the initial state of the page to be correct$/) do
+Then(/^I expect the initial state of the case_details page to be correct$/) do
   check_case_details_state
 end
