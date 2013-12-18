@@ -1,12 +1,16 @@
 Feature: Social Landlord, Start a case, Case details
 
+    @initial_state
+    Scenario: Before entering case details, check initial state of page
+    Given I am logged in as a Social Landlord delegate
+    And I have started a new claim, and filled in some valid personal_details
+    Then I expect the 'Tenancy type' radio button to default to 'Secure tenancy'
+    And I expect the 'Rent amount frequency' select to default to 'weekly'
+
     @happypath
     Scenario: Enter case details, new case
     Given I am logged in as a Social Landlord delegate
-    And I visit '/claims/new'
-    And I enter valid details for the property
-    And I enter valid details for at least one tenant
-    And I click the 'Continue to next step' button
+    And I have started a new claim, and filled in some valid personal_details
     When I fill in some valid case_details
     And I click the 'Continue to next step' button
     Then I expect to be redirected to '/claims/:id/check_details'

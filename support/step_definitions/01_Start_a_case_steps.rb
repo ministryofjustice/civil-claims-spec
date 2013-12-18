@@ -60,3 +60,11 @@ end
 Then(/^the details I entered to have been saved on "(.*?)"$/) do |arg1|
   pending # express the regexp above with the code you wish you had
 end
+
+Then(/^I expect the '(.*)' radio button to default to '(.*)'$/) do |button, default|
+  find_field(default).should be_checked
+end
+
+Then(/^I expect the '(.*)' select to default to '(.*)'$/) do |select, default|
+  find_field(select).find('option[value='+default+']').should be_selected
+end
