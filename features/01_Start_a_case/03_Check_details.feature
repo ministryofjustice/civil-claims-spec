@@ -1,15 +1,39 @@
 Feature: Social Landlord, Submit Claim, Step 3
 
-  @happypath @wip
-  Scenario: Start a new case, check details
+  Background:
     Given I am logged in as a Social Landlord delegate
-    When I create a new claim with valid details
-    And and visit "/claims/:id/check_details"
-    Then I confirm that all facts stated on the form are true
-    And I complete the statement of truth
+    And I have created a claim with valid personal and case details
+
+  @happypath @sprint2
+  Scenario: Start a new case, check details
+    Given I visit "/claims/:id/check_details"
+    And I confirm that all facts stated on the form are true
+    When I complete the statement of truth
     Then I expect to be redirected to "/claims/:id/court_fee"
     And my acceptance the statement of truth has been captured
 
+  @happypath @sprint2
+  Scenario: Get to step 3, edit Property details
+    Given I visit "/claims/:id/check_details"
+    When I click the 'Make Changes' link in the 'Property' section
+    And I edit the 'postcode' to 'ABC123'
+    And I click the 'Continue to next step' button
+    And I am redirected to '/claims/:id/case_details'
+    And I click the 'Continue to next step' button
+    And I am redirected to '/claims/:id/check_details'
+    Then I expect to see my change represented on the page in the Property address
+
+  @happypath @sprint2
+  Scenario: Get to step 3, edit Property details
+    Given I visit "/claims/:id/check_details"
+    When I click the 'Make Changes' link in the 'Property' section
+    And I edit the 'postcode' to 'ABC123'
+    And I click the 'Continue to next step' button
+    And I am redirected to '/claims/:id/case_details'
+    And I click the 'Continue to next step' button
+    And I am redirected to '/claims/:id/check_details'
+    Then I expect to see my change represented on the page in the Property address
+    
   @wip
   Scenario: Editing a claim after accepting SoT, before payment.
     Given I have created a claim, and accepted the SoT
