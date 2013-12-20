@@ -29,17 +29,12 @@ Then(/^my personal details are persisted on the page at "(.*?)"$/) do |path|
   check_tenant_details(Data.repossession_claim_tenant)
 end
 
-Given(/^there are (\d+) concurrent users of the system$/) do |num_users|
-  pending # express the regexp above with the code you wish you had
+Given(/^I have created a claim with valid personal and case details$/) do
+ step "I have started a new claim, and filled in some valid personal_details"
+ step "I fill in some valid case_details"
+ step "I click the 'Continue to next step' button"
 end
 
-When(/^they each create a claim$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I expect page response times to remain under (\d+)ms$/) do |response_time|
-  pending # express the regexp above with the code you wish you had
-end
 
 When(/^confirm that my pre\-filled personal business details are correct$/) do
   check_landlord_details(Data.repossession_claim_landlord)
@@ -57,8 +52,9 @@ When(/^I fill in some valid case_details$/) do
   fill_in_case(Data.repossession_claim_case)
 end
 
-Then(/^the details I entered to have been saved on "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^the case details I entered to have been saved on '(.*)'$/) do |path|
+  visit path.gsub(':id', @id)
+  check_case_detail(Data.repossession_claim_case)
 end
 
 Then(/^I expect the '(.*)' radio button to default to '(.*)'$/) do |button, default|
@@ -67,4 +63,20 @@ end
 
 Then(/^I expect the '(.*)' select to default to '(.*)'$/) do |select, default|
   find_field(select).find('option[value='+default+']').should be_selected
+end
+
+Given(/^I confirm that all facts stated on the form are true$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I check the '(.*)' checkbox$/) do |checkbox|
+  check(checkbox)
+end
+
+Then(/^I expect to be redirected to "(.*?)"$/) do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^my acceptance the statement of truth has been captured$/) do
+  pending # express the regexp above with the code you wish you had
 end

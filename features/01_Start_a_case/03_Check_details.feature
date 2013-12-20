@@ -3,16 +3,17 @@ Feature: Social Landlord, Submit Claim, Step 3
   Background:
     Given I am logged in as a Social Landlord delegate
     And I have created a claim with valid personal and case details
+    And I expect to be redirected to '/claims/:id/check_details'
 
   @happypath @sprint2
   Scenario: Start a new case, check details
-    Given I visit "/claims/:id/check_details"
-    And I confirm that all facts stated on the form are true
-    When I complete the statement of truth
-    Then I expect to be redirected to "/claims/:id/court_fee"
+    Given I confirm that all facts stated on the form are true
+    When I check the 'confirm-details' checkbox
+    And I click the 'Continue to next step' button
+    Then I expect to be redirected to '/claims/:id/court_fee'
     And my acceptance the statement of truth has been captured
 
-  @happypath @sprint2
+  @happypath @sprint2 @wip
   Scenario: Get to step 3, edit Property details
     Given I visit "/claims/:id/check_details"
     When I click the 'Make Changes' link in the 'Property' section
@@ -23,18 +24,18 @@ Feature: Social Landlord, Submit Claim, Step 3
     And I am redirected to '/claims/:id/check_details'
     Then I expect to see my change represented on the page in the Property address
 
-  @happypath @sprint2
-  Scenario: Get to step 3, edit Property details
+  @happypath @sprint2 @wip
+  Scenario: Get to step 3, edit Tenant details
     Given I visit "/claims/:id/check_details"
-    When I click the 'Make Changes' link in the 'Property' section
-    And I edit the 'postcode' to 'ABC123'
+    When I click the 'Make Changes' link in the 'Tenant (defendant)' section
+    And I edit the 'name' of the first tenanct to 'ABC123'
     And I click the 'Continue to next step' button
     And I am redirected to '/claims/:id/case_details'
     And I click the 'Continue to next step' button
     And I am redirected to '/claims/:id/check_details'
-    Then I expect to see my change represented on the page in the Property address
-    
-  @wip
+    Then I expect to see my change represented on the page in the Tenants name
+
+  @happypath @sprint2 @wip
   Scenario: Editing a claim after accepting SoT, before payment.
     Given I have created a claim, and accepted the SoT
     When I make a change to the claim details

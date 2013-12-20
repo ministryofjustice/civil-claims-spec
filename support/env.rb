@@ -7,7 +7,7 @@ require 'selenium-webdriver'
 World(RSpec::Matchers)
 
 config_file = File.join(File.dirname(__FILE__), 'config', 'environments.yml')
-environment = 'development'
+environment = 'demo'
 CONFIG = Hashie::Mash.new(YAML.load_file(config_file))[environment]
 
 Capybara.register_driver :firefox_with_no_javascript do |app|
@@ -37,4 +37,13 @@ Capybara.app_host = CONFIG.base_url
 # Capybara.default_driver = :firefox_with_proxy
 # Capybara.default_driver = :firefox_with_no_javascript
 # Capybara.default_driver = :poltergeist
-Capybara.default_driver = :selenium
+Capybara.default_driver = :poltergeist
+
+if ENV['DEMO']
+  Capybara.default_driver = :selenium
+
+  # AfterStep do
+  #   sleep 2
+  # end
+
+end

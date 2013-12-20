@@ -1,7 +1,7 @@
 # per environment config
 
-production:
-  base_url: 'http://localhost:3000'
+demo:
+  base_url: 'http://civilclaims-demo.dsd.io'
 
 development:
   base_url: 'http://localhost:3000'

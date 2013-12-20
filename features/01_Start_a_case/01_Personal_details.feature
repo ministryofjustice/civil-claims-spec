@@ -1,6 +1,6 @@
 Feature: Social Landlord, Start a case, Personal details
 
-  @happypath
+  @happypath @sprint2
   Scenario: Start a new case, with personal details
     Given I am logged in as a Social Landlord delegate
     When I visit '/claims/new'

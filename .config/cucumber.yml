@@ -3,3 +3,4 @@
 ---
 default: features --format pretty --require support --tags ~@wip
 guard: --format pretty --strict --require support --tags ~@wip
+demo: features --format pretty --require support --tags ~@wip DEMO=true

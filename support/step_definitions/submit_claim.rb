@@ -58,7 +58,7 @@ def fill_in_case(case_data)
     fill_in 'Daily rent amount', with: case_data[:daily_rent_amount]
   end
   within('#about-the-case') do
-    choose('noticeserved-' + case_data[:notice_served])
+    choose('claim_case_detail_type_of_notice_served_notice_seeking_possession')
     within('#notice-served-date') do
       find(:css, 'select.day').select(case_data[:notice_served_day])
       find(:css, 'select.month').select(case_data[:notice_served_month])
@@ -68,4 +68,28 @@ def fill_in_case(case_data)
   end
   fill_in 'further-info', with: case_data[:further_info]
   check('human-rights')
+end
+
+def check_case_detail(case_data)
+  within('#about-the-tenancy') do
+    within('#tenancy-start-date') do
+      expect(find(:css, 'select.day').value).to eql case_data[:tenancy_start_day]
+      expect(find(:css, 'select.month').find('option[selected]').text).to eql case_data[:tenancy_start_month]
+      expect(find(:css, 'select.year').value).to eql case_data[:tenancy_start_year]
+    end
+    expect(find_field('Rent amount').value.to_i).to eql case_data[:rent_amount].to_i
+    expect(find_field('Daily rent amount').value.to_i).to eql case_data[:daily_rent_amount].to_i
+  end
+
+  # within('#about-the-case') do
+  #   choose('claim_case_detail_type_of_notice_served_notice_seeking_possession')
+  #   within('#notice-served-date') do
+  #     find(:css, 'select.day').select(case_data[:notice_served_day])
+  #     find(:css, 'select.month').select(case_data[:notice_served_month])
+  #     find(:css, 'select.year').select(case_data[:notice_served_year])
+  #   end
+  #   fill_in 'Total unpaid rent', with: case_data[:total_unpaid_rent]
+  # end
+  # fill_in 'further-info', with: case_data[:further_info]
+  # check('human-rights')
 end
