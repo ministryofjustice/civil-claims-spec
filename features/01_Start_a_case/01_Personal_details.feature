@@ -1,16 +1,5 @@
 Feature: Social Landlord, Start a case, Personal details
 
-  @happypath @sprint2
-  Scenario: Start a new case, with personal details
-    Given I am logged in as a Social Landlord delegate
-    When I visit '/claims/new'
-    And confirm that my pre-filled personal business details are correct
-    And I enter valid details for the property
-    And I enter valid details for at least one tenant
-    And I click the 'Continue to next step' button
-    Then I expect to be redirected to '/claims/:id/case_details'
-    And my personal details are persisted on the page at "/claims/:id/personal_details"
-
   @validations @wip
   Scenario Outline: Required fields
     When I visit "/claims/new"

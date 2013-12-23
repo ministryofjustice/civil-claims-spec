@@ -3,15 +3,7 @@ Feature: Social Landlord, Submit Claim, Step 3
   Background:
     Given I am logged in as a Social Landlord delegate
     And I have created a claim with valid personal and case details
-    And I expect to be redirected to '/claims/:id/check_details'
-
-  @happypath @sprint2
-  Scenario: Start a new case, check details
-    Given I confirm that all facts stated on the form are true
-    When I check the 'confirm-details' checkbox
-    And I click the 'Continue to next step' button
-    Then I expect to be redirected to '/claims/:id/court_fee'
-    And my acceptance the statement of truth has been captured
+    And I visit the check details page
 
   @happypath @sprint2 @wip
   Scenario: Get to step 3, edit Property details

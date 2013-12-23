@@ -73,10 +73,6 @@ When(/^I check the '(.*)' checkbox$/) do |checkbox|
   check(checkbox)
 end
 
-Then(/^I expect to be redirected to "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
 Then(/^my acceptance the statement of truth has been captured$/) do
   pending # express the regexp above with the code you wish you had
 end

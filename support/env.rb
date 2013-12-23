@@ -10,6 +10,8 @@ config_file = File.join(File.dirname(__FILE__), 'config', 'environments.yml')
 environment = 'demo'
 CONFIG = Hashie::Mash.new(YAML.load_file(config_file))[environment]
 
+Data = Hashie::Mash.new(YAML.load_file(File.join(File.dirname(__FILE__), 'fixtures', 'repossession_court.yml')))
+
 Capybara.register_driver :firefox_with_no_javascript do |app|
   profile = Selenium::WebDriver::Firefox::Profile.new
   profile["javascript.enabled"] = false
@@ -42,8 +44,8 @@ Capybara.default_driver = :poltergeist
 if ENV['DEMO']
   Capybara.default_driver = :selenium
 
-  # AfterStep do
-  #   sleep 2
-  # end
+  AfterStep do
+    sleep 2
+  end
 
 end

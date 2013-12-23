@@ -1,0 +1,31 @@
+repossession_claim:
+  landlord:
+    organisation_name : Bristol City Council
+    full_name         : Bob Hoskins
+    phone             : 123456567
+    email             : bob.hoskins@example.com
+  property_details:
+    street            : 102 Petty France
+    town              : Westminster
+    postcode          : SW1H 9AJ
+  tenant:
+    title             : Mr
+    full_name         : Tenanty Tenant
+    phone             : 01 111 111 111
+    mobile            : 02222 222 2222
+    email             : tenant@example.com
+    street            : 110 Example Lane
+    town              : Bristol
+    postcode          : BS112 1AC
+  case_detail:
+    tenancy_start_day   : 10
+    tenancy_start_month : October
+    tenancy_start_year  : 2010
+    rent_amount         : 250.00
+    daily_rent_amount   : 40.00
+    notice_served       : possession
+    notice_served_day   : 1
+    notice_served_month : August
+    notice_served_year  : 2013
+    total_unpaid_rent   : 2345
+    further_info        : Bacon ipsum dolor sit amet biltong fatback consequat deserunt enim duis bacon commodo sint pig ham.
