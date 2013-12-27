@@ -5,15 +5,16 @@ Feature: Create a claim
 
   Background:
     Given I am logged in as a Social Landlord delegate
-      And I have started a new claim
-      And I have completed Step 1 with valid personal details
-      And I have completed Step 2 with valid case details
+      And I start a new claim
+      And I complete Step 1 with valid data
+      And I click the 'Continue to next step' button
+      And I complete Step 2 with valid data
+      And I click the 'Continue to next step' button
       And the check details page shows the correct information
 
   @sprint2
   Scenario: Personal details
     Given I visit the Personal Details page
-      And I have confirmed that my pre-filled personal business details are correct
      When I click the 'Continue to next step' button
      Then I expect to be shown the Case Details page
 

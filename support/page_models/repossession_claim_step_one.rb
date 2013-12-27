@@ -4,36 +4,28 @@ class RepossessionClaimStepOne < SitePrism::Page
 
   section :property, EditablePropertySection, '#property'
   section :council, LandlordSection, '#council'
-  section :tenants, EditableTenantsSection, '#tenant-details'
-end
+  sections :tenants, EditableTenantsSections, '#tenant-details .tenant-form'
 
-class EditablePropertySection < SitePrism::Section
-  element :title, 'h3'
-  element :street, 'textarea#claim_property_street'
-  element :town, 'input#claim_property_town'
-  element :postcode, 'input#claim_property_postcode'
-end
+  def complete_form_with_valid_data
+    property.street.set Data.repossession_claim.property.street
+    property.town.set Data.repossession_claim.property.town
+    property.postcode.set Data.repossession_claim.property.postcode
 
-class LandlordSection < SitePrism::Section
-  element :title, 'h3'
-  element :organisation_name, '.organisation_name .value'
-  element :address, '.address .value'
-  element :full_name, '.full_name .value'
-  element :phone, '.phone .value'
-  element :email, '.email .value'
-end
+    tenants.each do |tenant|
+      tenant.title.set Data.repossession_claim.tenant.title
+      tenant.full_name.set Data.repossession_claim.tenant.full_name
+      tenant.phone.set Data.repossession_claim.tenant.phone
+      tenant.email.set Data.repossession_claim.tenant.email
+      tenant.street.set Data.repossession_claim.tenant.street
+      tenant.town.set Data.repossession_claim.tenant.town
+      tenant.postcode.set Data.repossession_claim.tenant.postcode
+    end
+  end
 
-class EditableTenantsSection < SitePrism::Section
-  element :title, 'h3'
-  sections :tenant, EditableTenantsSection, '.tenant-form'
-end
-
-class EditableTenantSection < SitePrism::Section
-  element :title, '.title input'
-  element :full_name, '.full_name input'
-  element :mobile, '.mobile input'
-  element :email, '.email input'
-  element :street, '.street textarea'
-  element :town, '.town input'
-  element :postcode, '.postcode input'
+  def expect_correct_business_details
+    council.organisation_name.should eql Data.repossession_claim.landlord.organisation_name
+    council.full_name.should eql Data.repossession_claim.landlord.full_name
+    council.phone.should eql Data.repossession_claim.landlord.phone
+    council.email.should eql Data.repossession_claim.landlord.email
+  end
 end

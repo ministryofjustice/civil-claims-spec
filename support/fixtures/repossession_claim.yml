@@ -4,7 +4,7 @@ repossession_claim:
     full_name         : Bob Hoskins
     phone             : 123456567
     email             : bob.hoskins@example.com
-  property_details:
+  property:
     street            : 102 Petty France
     town              : Westminster
     postcode          : SW1H 9AJ

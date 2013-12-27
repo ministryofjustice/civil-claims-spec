@@ -1,6 +1,35 @@
 Given(/^I am logged in as a Social Landlord delegate$/) do
-  # does nothing, auth is feature flagged off for now
+  @app = App.new
 end
+
+Given(/^I start a new claim$/) do
+  @app.repossession_claim.load
+end
+
+Then(/^I expect that my pre\-filled personal business details are correct$/) do
+  @app.repossession_claim.step_1.expect_correct_business_details
+end
+
+Then(/^I expect the page to contain (\d+) editable tenant sections$/) do |num|
+  expect(@app.repossession_claim.step_1.tenants.size).to eql num.to_i
+end
+
+Given(/^I complete (.*) with (valid|invalid) data$/) do |step, validity|
+  method = "complete_form_with_#{validity}_data"
+  case step
+  when "Step 1"
+    @app.repossession_claim.step_1.send(method)
+  when "Step 2"
+    @app.repossession_claim.step_2.send(method)
+  else
+    raise "Check #{__FILE__} for step definition"
+  end
+end
+
+When(/^I click the '(.*)' button$/) do |button_text|
+  click_on button_text
+end
+
 
 Given(/^I have started a new claim, and filled in some valid personal_details$/) do
   step "I visit '/claims/new'"
@@ -13,9 +42,6 @@ When(/^I visit '(.*)'$/) do |path|
   visit path
 end
 
-When(/^I click the '(.*)' button$/) do |button_text|
-  click_on button_text
-end
 
 Then(/^I expect to be redirected to '(.*?)'$/) do |path|
   /(\d+)/.match(current_path) { |m| @id = m[1] }

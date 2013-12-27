@@ -1,6 +1,6 @@
 # config/cucumber.yml
 ##YAML Template
 ---
-default: features --format pretty --require support --tags ~@wip
+default: features --format pretty --require support --tags ~@wip ENV=development
 guard: --format pretty --strict --require support --tags ~@wip
-demo: features --format pretty --require support --tags ~@wip DEMO=true
+demo: features --format pretty --require support --tags ~@wip ENV=demo

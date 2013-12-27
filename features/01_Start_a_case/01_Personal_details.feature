@@ -1,5 +1,12 @@
 Feature: Social Landlord, Start a case, Personal details
 
+  @sprint2
+  Scenario: Check initial state of page
+    Given I am logged in as a Social Landlord delegate
+     When I start a new claim
+     Then I expect the page to contain 4 editable tenant sections
+      And I expect that my pre-filled personal business details are correct
+
   @validations @wip
   Scenario Outline: Required fields
     When I visit "/claims/new"
@@ -140,28 +147,6 @@ Feature: Social Landlord, Start a case, Personal details
     Then I expect to see input fields appear for Street, Town, Postcode 
     And that lets me enter address details manually
     And I enter text into the Postcode field I expect the inputted text to be validated
-
-    @wip
-  Scenario: Start a new case, enter tenant's mobile number
-    Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I enter details about the tenant
-    And I want to enter the tenant's contact telephone number 
-    Then I expect to see an input field displayed
-    And that lets me enter the tenant's contact telephone number
-    And validates the inputted characters after they are entered so that they display the correct pattern for a UK telephone number (mobile or landline)
-    And I can see the tenant's contact telephone number displayed formatted correctly
-
- @wip
-  Scenario: Start a new case, enter tenant's email address
-    Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    And I enter details about the tenant
-    And I want to enter the tenant's email address 
-    Then I expect to see an input field displayed
-    And that lets me enter the tenant's email address
-    And validates the inputted characters after they are entered so that they display the correct pattern for an email address
-    And I can see the tenant's email address displayed formatted correctly
 
     @wip
   Scenario: Start a new case, save and come back later

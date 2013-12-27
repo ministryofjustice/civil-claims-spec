@@ -1,4 +1,6 @@
-class RepossessionClaim
+class RepossessionClaim < SitePrism::Page
+  set_url '/claims/new'
+
   def step_1
     @step_one ||= RepossessionClaimStepOne.new
   end
