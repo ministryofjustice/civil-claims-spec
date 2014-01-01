@@ -6,12 +6,22 @@ Given(/^I start a new claim$/) do
   @app.repossession_claim.load
 end
 
+# Step 1 default page state
 Then(/^I expect that my pre\-filled personal business details are correct$/) do
   @app.repossession_claim.step_1.expect_correct_business_details
 end
 
 Then(/^I expect the page to contain (\d+) editable tenant sections$/) do |num|
   expect(@app.repossession_claim.step_1.tenants.size).to eql num.to_i
+end
+
+# Step 2 default page state
+Then(/^I expect the Tenancy type radio button to default to '(.*)'$/) do |val|
+  expect(@app.repossession_claim.step_2.tenancy_type.has_checked_field? val).to be true
+end
+
+Then(/^I expect the Rent amount frequency dropdown to default to '(.*)'$/) do |default_value|
+  expect(@app.repossession_claim.step_2.about_the_tenancy.rent_payment_frequency).eql default_value
 end
 
 Given(/^I complete (.*) with (valid|invalid) data$/) do |step, validity|
@@ -62,10 +72,6 @@ Given(/^I have created a claim with valid personal and case details$/) do
 end
 
 
-When(/^confirm that my pre\-filled personal business details are correct$/) do
-  check_landlord_details(Data.repossession_claim_landlord)
-end
-
 When(/^I enter valid details for the property$/) do
   fill_in_property(Data.repossession_claim_property_details)
 end
@@ -83,13 +89,6 @@ Then(/^the case details I entered to have been saved on '(.*)'$/) do |path|
   check_case_detail(Data.repossession_claim_case)
 end
 
-Then(/^I expect the '(.*)' radio button to default to '(.*)'$/) do |button, default|
-  find_field(default).should be_checked
-end
-
-Then(/^I expect the '(.*)' select to default to '(.*)'$/) do |select, default|
-  find_field(select).find('option[value='+default+']').should be_selected
-end
 
 Given(/^I confirm that all facts stated on the form are true$/) do
   pending # express the regexp above with the code you wish you had

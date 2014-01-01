@@ -3,9 +3,10 @@ Feature: Social Landlord, Start a case, Case details
     @sprint2
     Scenario: Before entering case details, check initial state of page
     Given I am logged in as a Social Landlord delegate
-    And I have started a new claim, and filled in some valid personal_details
-    Then I expect the 'Tenancy type' radio button to default to 'Secure tenancy'
-    And I expect the 'rent-amount-frequency' select to default to 'weekly'
+      And I start a new claim
+      And I click the 'Continue to next step' button
+     Then I expect the Tenancy type radio button to default to 'Secure tenancy'
+      And I expect the Rent amount frequency dropdown to default to 'weekly'
 
     @wip
     Scenario: Start a new case, selecting tenancy type
