@@ -10,7 +10,6 @@ World(RSpec::Matchers)
 environment = ENV['ENV'] || 'demo'
 config_file = File.join(File.dirname(__FILE__), 'config', 'environments.yml')
 CONFIG = Hashie::Mash.new(YAML.load_file(config_file))[environment]
-pp CONFIG
 
 page_models_dir = File.join(File.dirname(__FILE__), 'page_models', '*')
 page_section_models_dir = File.join(File.dirname(__FILE__), 'page_models', 'sections', '*')
@@ -19,7 +18,7 @@ Dir.glob(page_section_models_dir) { |f| require f }
 Dir.glob(page_models_dir) { |f| require f if File.file? f }
 
 
-Data = Hashie::Mash.new(YAML.load_file(File.join(File.dirname(__FILE__), 'fixtures', 'repossession_claim.yml')))
+RepossessionClaimData = Hashie::Mash.new(YAML.load_file(File.join(File.dirname(__FILE__), 'fixtures', 'repossession_claim.yml')))
 
 Capybara.register_driver :firefox_with_no_javascript do |app|
   profile = Selenium::WebDriver::Firefox::Profile.new

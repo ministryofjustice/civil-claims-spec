@@ -1,5 +1,5 @@
 Given(/^I am logged in as a Social Landlord delegate$/) do
-  @app = App.new
+  @app = App.new(RepossessionClaimData)
 end
 
 Given(/^I start a new claim$/) do
