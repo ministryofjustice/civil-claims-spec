@@ -21,5 +21,5 @@ YAML.load_file(config_file).keys.each do |profile|
 end
 
 rule "" do |t|
-  Rake::Task[:default].execute# expects a profile named default
+  Rake::Task[:default].execute # expects a profile named default
 end
