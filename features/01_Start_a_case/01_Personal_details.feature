@@ -1,5 +1,8 @@
-Feature: Social Landlord, Start a case, Personal details
-
+Feature: Personal details
+  As a Social Landlord
+  I want to enter the basic details of a claim
+  So I can begin a repossession case
+  
   @sprint2
   Scenario: Check initial state of page
     Given I am logged in as a Social Landlord delegate

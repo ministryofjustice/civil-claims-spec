@@ -2,7 +2,7 @@ repossession_claim:
   landlord:
     organisation_name : Bristol City Council
     full_name         : Bob Hoskins
-    phone             : 123456567
+    phone             : 1234 56567
     email             : bob.hoskins@example.com
   property:
     street            : 102 Petty France

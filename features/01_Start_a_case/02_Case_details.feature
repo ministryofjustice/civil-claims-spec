@@ -1,6 +1,6 @@
 Feature: Social Landlord, Start a case, Case details
 
-    @sprint2
+    @sprint2 @no-automation
     Scenario: Before entering case details, check initial state of page
     Given I am logged in as a Social Landlord delegate
       And I start a new claim

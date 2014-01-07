@@ -1,4 +1,6 @@
 class RepossessionClaimStepOne < SitePrism::Page
+  include RSpec::Matchers
+
   set_url '/claims/{/id}/personal_details'
   set_url_matcher /\/claims\/\d+\/personal_details/
 
@@ -28,9 +30,9 @@ class RepossessionClaimStepOne < SitePrism::Page
   end
 
   def expect_correct_business_details
-    council.organisation_name.should eql @data.repossession_claim.landlord.organisation_name
-    council.full_name.should eql         @data.repossession_claim.landlord.full_name
-    council.phone.should eql             @data.repossession_claim.landlord.phone
-    council.email.should eql             @data.repossession_claim.landlord.email
+    expect(council.organisation_name.text).to eql @data.repossession_claim.landlord.organisation_name
+    expect(council.full_name.text).to         eql @data.repossession_claim.landlord.full_name
+    expect(council.phone.text).to             eql @data.repossession_claim.landlord.phone
+    expect(council.email.text).to             eql @data.repossession_claim.landlord.email
   end
 end
