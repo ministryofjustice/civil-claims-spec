@@ -117,13 +117,6 @@ Feature: Social Landlord, Start a case, Personal details
     And I can see the number of tenants displayed
 
   @wip
-  Scenario: Start a new case, enter tenant's title
-    Given I am authorised
-    When I visit "/claims/new"
-    And I click on "Title"
-    Then I expect to be able to see the following options in the drop down list: [Mr, Mrs, Miss, Dr, Sargent, ...]
-
-    @wip
   Scenario: Start a new case, confirm whether they are living in the property or not
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
@@ -136,7 +129,7 @@ Feature: Social Landlord, Start a case, Personal details
     And I select "No" I expect to be displayed a postcode input field
     And I select "No" I expect to be displayed an enter address manually
 
-    @wip
+  @wip
   Scenario: Start a new case, confirm whether they are living in the property or not
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
@@ -148,7 +141,7 @@ Feature: Social Landlord, Start a case, Personal details
     And that lets me enter address details manually
     And I enter text into the Postcode field I expect the inputted text to be validated
 
-    @wip
+  @wip
   Scenario: Start a new case, save and come back later
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"

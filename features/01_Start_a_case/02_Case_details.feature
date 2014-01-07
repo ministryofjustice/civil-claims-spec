@@ -15,8 +15,6 @@ Feature: Social Landlord, Start a case, Case details
     And I select the tenancy type
     Then I expect to see a list of options as radio buttons
     And I expect to see the "Secure tenancy" radio button pre-selected
-    And when I select any other radio button
-    And I expect to see that option selected
 
     @wip
     Scenario: Start a new case, selecting tenancy start date
