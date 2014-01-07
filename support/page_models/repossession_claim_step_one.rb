@@ -4,9 +4,9 @@ class RepossessionClaimStepOne < SitePrism::Page
   set_url '/claims/{/id}/personal_details'
   set_url_matcher /\/claims\/\d+\/personal_details/
 
-  section :property, EditablePropertySection, '#property'
-  section :council, LandlordSection, '#council'
-  sections :tenants, EditableTenantsSections, '#tenant-details .tenant-form'
+  section :property,    EditablePropertySection,    '#property'
+  section :council,     LandlordSection,            '#council'
+  section :tenants,     EditableTenantSectionGroup, '#tenant_details'
 
   
   def initialize(test_data)
@@ -18,10 +18,10 @@ class RepossessionClaimStepOne < SitePrism::Page
     property.town.set       @data.repossession_claim.property.town
     property.postcode.set   @data.repossession_claim.property.postcode
 
-    tenants.each do |tenant|
+    tenants.tenant.each do |tenant|
       tenant.title.set      @data.repossession_claim.tenant.title
       tenant.full_name.set  @data.repossession_claim.tenant.full_name
-      tenant.phone.set      @data.repossession_claim.tenant.phone
+      tenant.mobile.set     @data.repossession_claim.tenant.phone
       tenant.email.set      @data.repossession_claim.tenant.email
       tenant.street.set     @data.repossession_claim.tenant.street
       tenant.town.set       @data.repossession_claim.tenant.town

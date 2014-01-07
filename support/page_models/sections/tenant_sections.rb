@@ -1,4 +1,4 @@
-class EditableTenantsSections < SitePrism::Section
+class EditableTenantSection < SitePrism::Section
   element :title, '.title input'
   element :full_name, '.full_name input'
   element :mobile, '.mobile input'
@@ -8,7 +8,7 @@ class EditableTenantsSections < SitePrism::Section
   element :postcode, '.postcode input'
 end
 
-# class EditableTenantsSection < SitePrism::Section
-#   element :title, 'h3'
-#   sections :tenant, EditableTenant, '.tenant-form'
-# end
+class EditableTenantSectionGroup < SitePrism::Section
+  element :title, 'h3'
+  sections :tenant, EditableTenantSection, '.tenant-form'
+end

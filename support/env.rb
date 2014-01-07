@@ -48,6 +48,14 @@ Capybara.app_host = CONFIG.base_url
 # Capybara.default_driver = :poltergeist
 Capybara.default_driver = :poltergeist
 
+if ENV.has_key?('browser') && ENV['browser'] == 'selenium'
+  Capybara.default_driver = :selenium
+end
+
+if ENV.has_key? 'wait'
+  AfterStep { sleep 2 }
+end
+
 if environment == 'demo'
   Capybara.default_driver = :selenium
   AfterStep { sleep 2 }

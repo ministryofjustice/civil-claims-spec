@@ -1,3 +1,5 @@
+require 'byebug'
+
 Given(/^I am logged in as a Social Landlord delegate$/) do
   @app = App.new(RepossessionClaimData)
 end
@@ -12,7 +14,7 @@ Then(/^I expect that my pre\-filled personal business details are correct$/) do
 end
 
 Then(/^I expect the page to contain (\d+) editable tenant sections$/) do |num|
-  expect(@app.repossession_claim.step_1.tenants.size).to eql num.to_i
+  expect( @app.repossession_claim.step_1.tenants.tenant.size ).to eql num.to_i
 end
 
 # Step 2 default page state
@@ -28,8 +30,10 @@ Given(/^I complete (.*) with (valid|invalid) data$/) do |step, validity|
   method = "complete_form_with_#{validity}_data"
   case step
   when "Step 1"
+    raise "Wrong URL: #{current_path}" unless @app.repossession_claim.displayed?
     @app.repossession_claim.step_1.send(method)
   when "Step 2"
+    raise "Wrong URL: #{current_path}" unless @app.repossession_claim.step_2.displayed?
     @app.repossession_claim.step_2.send(method)
   else
     raise "Check #{__FILE__} for step definition"
@@ -89,6 +93,13 @@ Then(/^the case details I entered to have been saved on '(.*)'$/) do |path|
   check_case_detail(Data.repossession_claim_case)
 end
 
+Then(/^I expect to be shown the Check Details page$/) do
+  expect(@app.repossession_claim.step_3.displayed?).to be true
+end
+
+Then(/^the check details page shows the correct information$/) do
+  @app.repossession_claim.step_3.expect_correct_details
+end
 
 Given(/^I confirm that all facts stated on the form are true$/) do
   pending # express the regexp above with the code you wish you had
