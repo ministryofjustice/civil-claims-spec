@@ -24,8 +24,8 @@ repossession_claim:
     tenancy_start_year  : 2010
     rent_amount         : 250.00
     rent_frequency      : per week
-  about_case:
     daily_rent_amount   : 40.00
+  about_case:
     notice_served       : Notice seeking possession
     notice_served_day   : 1
     notice_served_month : August

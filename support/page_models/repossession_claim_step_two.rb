@@ -12,6 +12,13 @@ class RepossessionClaimStepTwo < SitePrism::Page
   end
 
   def complete_form_with_valid_data
+    complete_about_tenancy_form_section
+    complete_about_case_form_section
+  end
+
+private
+  
+  def complete_about_tenancy_form_section
     d = @data.repossession_claim.about_tenancy
 
     choose d.tenancy_type
@@ -21,7 +28,9 @@ class RepossessionClaimStepTwo < SitePrism::Page
     about_the_tenancy.rent_amount.set d.rent_amount
     select(d.rent_frequency, from: about_the_tenancy.rent_payment_frequency[:id])
     about_the_tenancy.daily_rent_amount.set d.daily_rent_amount
+  end
 
+  def complete_about_case_form_section
     d = @data.repossession_claim.about_case
 
     choose d.notice_served
@@ -33,6 +42,5 @@ class RepossessionClaimStepTwo < SitePrism::Page
 
     further_information.further_info.set @data.repossession_claim.additional.further_info
     further_information.human_rights_act.set ( @data.repossession_claim.additional.human_rights == 'yes' ? 1 : 0 )
-
   end
 end

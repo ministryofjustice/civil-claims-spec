@@ -21,7 +21,7 @@ class RepossessionClaimStepOne < SitePrism::Page
     tenants.tenant.each do |tenant|
       tenant.title.set      @data.repossession_claim.tenant.title
       tenant.full_name.set  @data.repossession_claim.tenant.full_name
-      tenant.mobile.set     @data.repossession_claim.tenant.phone
+      tenant.phone.set      @data.repossession_claim.tenant.phone
       tenant.email.set      @data.repossession_claim.tenant.email
       tenant.street.set     @data.repossession_claim.tenant.street
       tenant.town.set       @data.repossession_claim.tenant.town

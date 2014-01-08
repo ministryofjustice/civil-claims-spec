@@ -10,3 +10,11 @@ class EditableAboutTenancySection < SitePrism::Section
   element :rent_payment_frequency, ".rent_amount select"
   element :daily_rent_amount, ".daily_rent_amount input.pound"
 end
+
+class AboutTenancySection < SitePrism::Section
+  element :title,               'h3'
+  element :tenancy_type,        '.tenancy_type .value'
+  element :tenancy_start_date,  '.tenancy_start_date .value'
+  element :rent_amount,         '.rent_amount .value'
+  element :daily_rent_amount,   '.daily_rent_amount .value'
+end

@@ -8,3 +8,10 @@ class EditableAboutCaseSection < SitePrism::Section
   element :notice_served_date_day, "#notice-served-date select.day"
   element :total_unpaid_rent, ".total_unpaid_rent input"
 end
+
+class AboutCaseSection < SitePrism::Section
+  element :title, 'h3'
+  element :notice_served, '.notice_served .value'
+  element :date_notice_served, '.date_notice_served .value'
+  element :total_unpaid_rent, '.total_unpaid_rent .value'
+end
