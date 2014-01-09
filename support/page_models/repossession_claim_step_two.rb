@@ -5,6 +5,9 @@ class RepossessionClaimStepTwo < SitePrism::Page
   section :about_the_tenancy,   EditableAboutTenancySection,        '#about-the-tenancy'
   section :about_the_case,      EditableAboutCaseSection,           '#about-the-case'
   section :further_information, EditableFurtherInformationSection,  '#further-information'
+  section :recovery,            EditableRecoveryStepsSection,       '#recovery-steps-section'
+  section :about_the_defendant, EditableAboutDefendantSection,      '#about-defendant-section'
+  section :about_the_claimant,  EditableAboutClaimantSection,       '#about-claimant-section'
 
  
   def initialize(test_data)
@@ -42,5 +45,9 @@ private
 
     further_information.further_info.set @data.repossession_claim.additional.further_info
     further_information.human_rights_act.set ( @data.repossession_claim.additional.human_rights == 'yes' ? 1 : 0 )
+
+    recovery.recovery_steps.set @data.repossession_claim.additional.recovery_steps
+    about_the_defendant.about_defendant.set @data.repossession_claim.additional.about_defendant
+    about_the_claimant.about_claimant.set @data.repossession_claim.additional.about_claimant
   end
 end
