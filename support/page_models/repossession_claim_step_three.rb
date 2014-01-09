@@ -4,12 +4,15 @@ class RepossessionClaimStepThree < SitePrism::Page
   set_url '/claims/{/id}/check_details'
   set_url_matcher /\/claims\/\d+\/check_details/
 
-  section :property,      PropertySection,            '#property'
-  section :claimant,      LandlordSection,            '#claimant'
-  section :tenants,       TenantSectionGroup,         '#tenants'
-  section :tenancy,       AboutTenancySection,        '#about-tenancy'
-  section :about_case,    AboutCaseSection,           '#about-case'
-  section :additional,    FurtherInformationSection,  '#further-information'
+  section :property,                 PropertySection,            '#property'
+  section :claimant,                 LandlordSection,            '#claimant'
+  section :tenants,                  TenantSectionGroup,         '#tenants'
+  section :tenancy,                  AboutTenancySection,        '#about-tenancy'
+  section :about_case,               AboutCaseSection,           '#about-case'
+  section :additional,               FurtherInformationSection,  '#further-information'
+  section :recovery,                 RecoveryStepsSection,       '#recovery-steps'
+  section :about_the_defendant,      AboutDefendantSection,      '#about-defendant'
+  section :about_the_claimant,       AboutClaimantSection,       '#about-claimant'
 
   def initialize(test_data)
     @data = test_data
@@ -22,6 +25,9 @@ class RepossessionClaimStepThree < SitePrism::Page
     expect_correct_tenancy_details
     expect_correct_case_details
     expect_correct_further_information
+    expect_correct_recovery_steps
+    expect_correct_about_defendant
+    expect_correct_about_claimant
   end
 
   def expect_correct_property_details
@@ -73,6 +79,21 @@ class RepossessionClaimStepThree < SitePrism::Page
   def expect_correct_further_information
     d = @data.repossession_claim.additional
     expect(additional.further_info.text).to     eql     d.further_info
+  end
+
+  def expect_correct_recovery_steps
+    d = @data.repossession_claim.additional
+    expect(recovery.recovery_steps.text).to                 eql     d.recovery_steps
+  end
+
+  def expect_correct_about_defendant
+    d = @data.repossession_claim.additional
+    expect(about_the_defendant.about_defendant.text).to     eql     d.about_defendant
+  end
+
+  def expect_correct_about_claimant
+    d = @data.repossession_claim.additional
+    expect(about_the_claimant.about_claimant.text).to       eql     d.about_claimant
   end
 
 end
