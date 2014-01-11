@@ -2,12 +2,6 @@ Feature: As a Social Landlord
   I want to login to UCC
   So I am able to submit a claim
 
-  @sprint3 @wip @happypath
-  Scenario: Happy Path
-   Given an email address and password for a social landlord account
-    When I login with these details
-    Then I should be presented with the landing page
-
   @sprint3 @wip
   Scenario Outline: Incorrect login details
    Given a <username> and <password>

@@ -4,6 +4,7 @@ require 'hashie'
 require 'rspec/expectations'
 require 'selenium-webdriver'
 require 'site_prism'
+require 'byebug'
 
 World(RSpec::Matchers)
 
@@ -54,6 +55,10 @@ end
 
 if ENV.has_key? 'wait'
   AfterStep { sleep 2 }
+end
+
+if ENV.has_key? 'debug'
+  AfterStep { byebug }
 end
 
 if environment == 'demo'

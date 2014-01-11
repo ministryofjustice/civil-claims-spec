@@ -1,11 +1,11 @@
-require 'byebug'
-
 Given(/^I am logged in as a Social Landlord delegate$/) do
   @app = App.new(RepossessionClaimData)
+  @app.login('social_landlord')
 end
 
 Given(/^I start a new claim$/) do
-  @app.repossession_claim.load
+  expect(@app.repossession_claim.displayed?).to be true
+  click_link 'Start a new case'
 end
 
 # Step 1 default page state
@@ -30,67 +30,25 @@ Given(/^I complete (.*) with (valid|invalid) data$/) do |step, validity|
   method = "complete_form_with_#{validity}_data"
   case step
   when "Step 1"
-    raise "Wrong URL: #{current_path}" unless @app.repossession_claim.displayed?
     @app.repossession_claim.step_1.send(method)
   when "Step 2"
-    raise "Wrong URL: #{current_path}" unless @app.repossession_claim.step_2.displayed?
+    @app.repossession_claim.set_id
     @app.repossession_claim.step_2.send(method)
   else
     raise "Check #{__FILE__} for step definition"
   end
 end
 
-When(/^I click the '(.*)' button$/) do |button_text|
-  click_on button_text
-end
-
-
-Given(/^I have started a new claim, and filled in some valid personal_details$/) do
-  step "I visit '/claims/new'"
-  step "I enter valid details for the property"
-  step "I enter valid details for at least one tenant"
+Given(/^I have created a claim with valid personal and case details$/) do
+  step 'I start a new claim'
+  step 'I complete Step 1 with valid data'
+  step "I click the 'Continue to next step' button"
+  step 'I complete Step 2 with valid data'
   step "I click the 'Continue to next step' button"
 end
 
-When(/^I visit '(.*)'$/) do |path|
-  visit path
-end
-
-
-Then(/^I expect to be redirected to '(.*?)'$/) do |path|
-  /(\d+)/.match(current_path) { |m| @id = m[1] }
-  regex = Regexp.new path.gsub(':id', '(\d+)')
-  fail("Path mismatch. Expected #{path} but received #{current_url}") if !( current_url =~ regex ) 
-end
-
-Then(/^my personal details are persisted on the page at "(.*?)"$/) do |path|
-  visit path.gsub(':id', @id)
-  check_property_details(Data.repossession_claim_property_details)
-  check_tenant_details(Data.repossession_claim_tenant)
-end
-
-Given(/^I have created a claim with valid personal and case details$/) do
- step "I have started a new claim, and filled in some valid personal_details"
- step "I fill in some valid case_details"
- step "I click the 'Continue to next step' button"
-end
-
-
-When(/^I enter valid details for the property$/) do
-  fill_in_property(Data.repossession_claim_property_details)
-end
-
-When(/^I enter valid details for at least one tenant$/) do
-  fill_in_tenant(Data.repossession_claim_tenant)
-end
-
-When(/^I fill in some valid case_details$/) do
-  fill_in_case(Data.repossession_claim_case)
-end
-
-Then(/^the case details I entered to have been saved on '(.*)'$/) do |path|
-  visit path.gsub(':id', @id)
-  check_case_detail(Data.repossession_claim_case)
+When(/^I click the '(.*)' button$/) do |button_text|
+  click_on button_text
 end
 
 Then(/^I expect to be shown the Check Details page$/) do
@@ -101,14 +59,22 @@ Then(/^the check details page shows the correct information$/) do
   @app.repossession_claim.step_3.expect_correct_details
 end
 
-Given(/^I confirm that all facts stated on the form are true$/) do
-  pending # express the regexp above with the code you wish you had
-end
-
 When(/^I check the '(.*)' checkbox$/) do |checkbox|
-  check(checkbox)
+  check checkbox
 end
 
-Then(/^my acceptance the statement of truth has been captured$/) do
-  pending # express the regexp above with the code you wish you had
+Given(/^I visit the check details page$/) do
+  @app.repossession_claim.step_3.load id: @app.repossession_claim.id
+end
+
+Given(/^an email address and password for a social landlord account$/) do
+  @app = App.new(RepossessionClaimData)
+end
+
+When(/^I login with these details$/) do
+  @app.login('social_landlord')
+end
+
+Then(/^I should be presented with the landing page$/) do
+  expect(@app.repossession_claim.displayed?).to be true
 end

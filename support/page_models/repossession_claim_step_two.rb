@@ -19,6 +19,10 @@ class RepossessionClaimStepTwo < SitePrism::Page
     complete_about_case_form_section
   end
 
+  def claim_id
+
+  end
+
 private
   
   def complete_about_tenancy_form_section

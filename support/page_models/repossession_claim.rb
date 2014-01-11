@@ -1,9 +1,15 @@
 class RepossessionClaim < SitePrism::Page
-  set_url '/claims/new'
-  set_url_matcher /\/claims\/new/
+  set_url '/claims/landing'
+  set_url_matcher /\/claims\/landing/
+
+  attr_accessor :id
 
   def initialize(test_data)
     @data = test_data
+  end
+
+  def set_id
+    /(\d+)/.match(current_path) { |m| @id = m[1] }
   end
 
   def step_1

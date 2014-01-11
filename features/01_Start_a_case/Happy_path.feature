@@ -13,3 +13,9 @@ Feature: Create a claim
       And I click the 'Continue to next step' button 
      Then I expect to be shown the Check Details page
       And the check details page shows the correct information
+
+  @sprint3
+  Scenario: Login
+   Given an email address and password for a social landlord account
+    When I login with these details
+    Then I should be presented with the landing page
