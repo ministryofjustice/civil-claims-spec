@@ -10,12 +10,13 @@ Feature: As a Social Landlord
      And I see the following <error> message
 
     Examples:
-    | username     | password        | error  |
+    | username     | password       | error  |
+    | valid        | invalid        | 
 
-  @sprint3 @wip
+  @sprint3
   Scenario: Logout
-   Given I am logged in as a social landlord
-    When I click the Signout button
+   Given I am logged in as a Social Landlord delegate
+    When I click the Signout link
     Then I should be logged out of the application
 
 
@@ -25,8 +26,5 @@ Feature: As a Social Landlord
 # Scenario: Prevent username enumeration
 # - rate limit / IP filter persistant login attempts which get the username wrong
 
-# Scenario: Multiple login failures
+# Scenario: Multiple login failures lock account
 # - lock accounts where password has been submitted incorrectly 5 times in a row
-
-# Scenario: Timing side-channel attack mitigation
-# - question for the devise-auth service mainly

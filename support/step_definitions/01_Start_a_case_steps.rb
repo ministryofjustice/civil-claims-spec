@@ -78,3 +78,12 @@ end
 Then(/^I should be presented with the landing page$/) do
   expect(@app.repossession_claim.displayed?).to be true
 end
+
+When(/^I click the Signout link$/) do
+  click_link 'Sign out'
+end
+
+Then(/^I should be logged out of the application$/) do
+  @app.repossession_claim.load
+  expect(@app.repossession_claim.displayed?).to be false
+end
