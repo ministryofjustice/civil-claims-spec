@@ -87,3 +87,7 @@ Then(/^I should be logged out of the application$/) do
   @app.repossession_claim.load
   expect(@app.repossession_claim.displayed?).to be false
 end
+
+Then(/^my name should be shown in the page header$/) do
+  expect(@app.repossession_claim.page_header.username.text).to include RepossessionClaimData.repossession_claim.landlord.full_name
+end

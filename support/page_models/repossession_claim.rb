@@ -4,6 +4,8 @@ class RepossessionClaim < SitePrism::Page
 
   attr_accessor :id
 
+  section :page_header, PageHeaderSection, "#user-nav" 
+
   def initialize(test_data)
     @data = test_data
   end

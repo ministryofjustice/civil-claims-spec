@@ -11,7 +11,7 @@ Feature: As a Social Landlord
 
     Examples:
     | username     | password       | error  |
-    | valid        | invalid        | 
+    | valid        | invalid        | Incorrect username or password |
 
   @sprint3
   Scenario: Logout
@@ -26,5 +26,9 @@ Feature: As a Social Landlord
 # Scenario: Prevent username enumeration
 # - rate limit / IP filter persistant login attempts which get the username wrong
 
-# Scenario: Multiple login failures lock account
-# - lock accounts where password has been submitted incorrectly 5 times in a row
+  @sprint3 @wip
+  Scenario: Multiple login failures lock account
+    Given the username of a registered Social Landlord delegate
+     When I try to login with the wrong password 5 times in a row
+     Then I should see a message stating 'Your account has been locked, please speak to a court administrator'
+      And I should not be able to login to this account

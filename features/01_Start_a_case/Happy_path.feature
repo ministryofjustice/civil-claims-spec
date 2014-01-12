@@ -19,3 +19,4 @@ Feature: Create a claim
    Given an email address and password for a social landlord account
     When I login with these details
     Then I should be presented with the landing page
+     And my name should be shown in the page header
