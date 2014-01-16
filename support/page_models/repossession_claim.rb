@@ -25,4 +25,12 @@ class RepossessionClaim < SitePrism::Page
   def step_3
     @step_3 ||= RepossessionClaimStepThree.new(@data)
   end
+
+  def step_4
+    @step_four ||= RepossessionClaimStepFour.new(@data)
+  end
+
+  def step_5
+    @step_five ||= RepossessionClaimStepFive.new(@data)
+  end
 end

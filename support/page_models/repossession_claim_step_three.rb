@@ -14,6 +14,8 @@ class RepossessionClaimStepThree < SitePrism::Page
   section :about_the_defendant,      AboutDefendantSection,      '#about-defendant'
   section :about_the_claimant,       AboutClaimantSection,       '#about-claimant'
 
+  element :confirm_details, "input[type='checkbox']#confirm-details"
+
   def initialize(test_data)
     @data = test_data
   end

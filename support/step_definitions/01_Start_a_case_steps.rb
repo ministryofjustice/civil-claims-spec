@@ -47,15 +47,29 @@ Given(/^I have created a claim with valid personal and case details$/) do
   step "I click the 'Continue to next step' button"
 end
 
+Given(/^I have accepted toe statement of truth$/) do
+  @app.repossession_claim.step_3.confirm_details.set true
+  step "I click the 'Continue to next step' button"
+end
+
+Given(/^the payment information is correct$/) do
+  # noop
+end
+
+Then(/^I expect to see my case number displayed$/) do
+  @app.repossession_claim.step_5.should have_case_number
+end
+
+Then(/^the details of the case to be correct$/) do
+  # noop
+end
+
 When(/^I click the '(.*)' button$/) do |button_text|
   click_on button_text
 end
 
-Then(/^I expect to be shown the Check Details page$/) do
-  expect(@app.repossession_claim.step_3.displayed?).to be true
-end
-
 Then(/^the check details page shows the correct information$/) do
+  expect(@app.repossession_claim.step_3.displayed?).to be true
   @app.repossession_claim.step_3.expect_correct_details
 end
 

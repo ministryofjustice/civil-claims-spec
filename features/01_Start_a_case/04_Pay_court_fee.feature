@@ -6,8 +6,8 @@ Feature: As a social landlord
 
   @sprint3 @wip
   Scenario: Happy path
-   Given I am logged in as a social landlord
-     And I have created a claim, and completed steps 1-3
+   Given I am logged in as a Social Landlord delegate
+     And I have created a claim with valid personal and case details, and accepted the statement of truth
      And I visit step 4
      And I expect to see the name of the court, and provisional hearing date
      And I expect my payment details to be displayed and correct

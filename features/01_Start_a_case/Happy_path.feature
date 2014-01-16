@@ -3,16 +3,16 @@ Feature: Create a claim
   As a Social Landlord
   I want to create a Repossession Claim
 
-  @sprint2
+  @sprint3
   Scenario: Create a claim
     Given I am logged in as a Social Landlord delegate
-      And I start a new claim
-     When I complete Step 1 with valid data
-      And I click the 'Continue to next step' button
-      And I complete Step 2 with valid data
-      And I click the 'Continue to next step' button 
-     Then I expect to be shown the Check Details page
+      And I have created a claim with valid personal and case details 
       And the check details page shows the correct information
+      And I have accepted toe statement of truth
+      And the payment information is correct
+     When I click the 'Pay and send case to the court' button
+     Then I expect to see my case number displayed
+      And the details of the case to be correct
 
   @sprint3
   Scenario: Login
