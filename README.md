@@ -32,3 +32,6 @@ Run specs
     cd ../civil-claims-spec
     rake
 
+Run the specs with selenium
+
+    rake browser=selenium
