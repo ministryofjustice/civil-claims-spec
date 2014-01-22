@@ -6,6 +6,6 @@ Then(/^I expect to be on the same page$/) do
   expect(@app.repossession_claim.current_path).to eql "/claims/new"
 end
 
-Then(/^there to be an (.*)$/) do |message|
-  expect(@app.repossession_claim.body).to contain message
+Then(/^there to be an (.*) message$/) do |message|
+  within(:css, ".error-summary") { page.should have_content message }
 end
