@@ -41,6 +41,8 @@ GEM
       cucumber (>= 1.2.0)
       guard (>= 1.1.0)
     hashie (2.0.5)
+    launchy (2.4.2)
+      addressable (~> 2.3)
     listen (2.2.0)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -109,6 +111,7 @@ DEPENDENCIES
   cucumber
   guard-cucumber
   hashie
+  launchy
   poltergeist
   rake
   rspec
