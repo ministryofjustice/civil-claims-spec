@@ -3,6 +3,6 @@
 ---
 default: features --format pretty --require support --tags ~@wip --tags ~@no-automation ENV=development
 guard:  --strict  --format pretty --require support --tags ~@wip --tags ~@no-automation
-demo: features    --format pretty --require support --tags ~@wip --tags ~@no-automation ENV=demo
+demo: features    --format pretty --require support --tags ~@wip --tags ~@no-automation ENV=demo wait=3
 list_tags: features --dry-run --format Cucumber::Formatter::TagList --require support
 kamikaze: features --format pretty --require support

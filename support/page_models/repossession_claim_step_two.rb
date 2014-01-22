@@ -27,7 +27,7 @@ private
   
   def complete_about_tenancy_form_section
     d = @data.repossession_claim.about_tenancy
-
+    
     choose d.tenancy_type
     select(d.tenancy_start_year, from: about_the_tenancy.tenancy_start_date_year[:id])
     select(d.tenancy_start_month, from: about_the_tenancy.tenancy_start_date_month[:id])  
@@ -53,5 +53,15 @@ private
     recovery.recovery_steps.set @data.repossession_claim.additional.recovery_steps
     about_the_defendant.about_defendant.set @data.repossession_claim.additional.about_defendant
     about_the_claimant.about_claimant.set @data.repossession_claim.additional.about_claimant
+  end
+
+  # overriding capybara choose method with one that actually works
+  def choose(label_text)
+    node = find_field(label_text)
+    begin
+      node.trigger('click')
+    rescue
+      super(label_text)
+    end
   end
 end
