@@ -41,7 +41,7 @@ Run the specs with selenium
 Command line help:
 
 ```shell
-rake help
+$ rake help
 
 Runs cucumber features.
 
