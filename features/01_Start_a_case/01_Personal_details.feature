@@ -93,14 +93,6 @@ Feature: Personal details
     And when I enter text into the Postcode field I expect the inputted text to be validated
 
   @javascript @wip
-  Scenario: Start a new case, confirm claimant's address and contact details
-    Given I am logged in as a Social Landlord delegate
-    When I visit "/claims/new"
-    Then I expect to see the correct Social Landlord name
-    Then I expect to see the correct contact address (including street and postcode)
-    Then I expect to see the correct name of the Social Landlord delegate
-
-  @javascript @wip
   Scenario: Start a new case, enter a Land Registry title number
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
