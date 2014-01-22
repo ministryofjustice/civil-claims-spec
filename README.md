@@ -32,9 +32,13 @@ Run specs
     cd ../civil-claims-spec
     rake
 
-Run the specs with selenium
+Run all the specs with selenium
 
     rake browser=selenium
+
+or run an individual feature with (see the advanced section below for details):
+
+    cucumber features/01_Start_a_case/01_Personal_details.feature --wip browser=selenium
 
 #### Advanced Usage:
 
