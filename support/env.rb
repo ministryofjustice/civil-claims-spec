@@ -42,7 +42,7 @@ end
 
 
 Capybara.run_server = false
-Capybara.app_host = CONFIG.base_url
+Capybara.app_host = ENV['base_url'] || CONFIG.base_url
 
 # Capybara.default_driver = :firefox_with_proxy
 # Capybara.default_driver = :firefox_with_no_javascript
@@ -59,9 +59,4 @@ end
 
 if ENV.has_key? 'debug'
   AfterStep { byebug }
-end
-
-if environment == 'demo'
-  Capybara.default_driver = :selenium
-  AfterStep { sleep 2 }
 end
