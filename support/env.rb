@@ -54,7 +54,7 @@ if ENV.has_key?('browser') && ENV['browser'] == 'selenium'
 end
 
 if ENV.has_key? 'wait'
-  AfterStep { sleep 2 }
+  AfterStep { sleep ENV['wait'].to_i }
 end
 
 if ENV.has_key? 'debug'
