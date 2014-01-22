@@ -12,13 +12,14 @@ Feature: Personal details
 
   @validations @wip
   Scenario Outline: Required fields
-    When I visit "/claims/new"
-    And I enter valid details for everything except <form_field>
-    Then I expect form validation to fail
-    And return the <message>
+    When I start a new claim
+     And I enter valid details for everything except <form_field>
+     And I click the 'Continue to next step' button
+    Then I expect to be on the same page
+     And there to be an <error> message
 
-    Examples:
-    | form_field     | message                                         |
+     Examples:
+    | form_field     | error                                           |
     | tenant-email   | Email address must be in format name@server.com |
     | postcode       | Missing postcode!                               |
 
