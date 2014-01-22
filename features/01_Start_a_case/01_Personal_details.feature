@@ -10,7 +10,7 @@ Feature: Personal details
      Then I expect the page to contain 4 editable tenant sections
       And I expect that my pre-filled personal business details are correct
 
-  @validations
+  @validations @sprint4
   Scenario Outline: Required fields
     Given I am logged in as a Social Landlord delegate
     When I start a new claim
