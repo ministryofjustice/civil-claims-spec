@@ -2,7 +2,7 @@ Feature: Personal details
   As a Social Landlord
   I want to enter the basic details of a claim
   So I can begin a repossession case
-  
+
   @sprint2
   Scenario: Check initial state of page
     Given I am logged in as a Social Landlord delegate
@@ -10,8 +10,9 @@ Feature: Personal details
      Then I expect the page to contain 4 editable tenant sections
       And I expect that my pre-filled personal business details are correct
 
-  @validations @wip
+  @validations
   Scenario Outline: Required fields
+    Given I am logged in as a Social Landlord delegate
     When I start a new claim
      And I enter valid details for everything except <form_field>
      And I click the 'Continue to next step' button
@@ -98,7 +99,7 @@ Feature: Personal details
     And I confirm that the displayed details of the claimant are correct
     Then I expect to see the correct Social Landlord name
     Then I expect to see the correct contact address (including street and postcode)
-    Then I expect to see the correct name of the Social Landlord delegate 
+    Then I expect to see the correct name of the Social Landlord delegate
 
   @javascript @wip
   Scenario: Start a new case, enter a Land Registry title number
@@ -106,7 +107,7 @@ Feature: Personal details
     When I visit "/claims/new"
     And I enter details of the tenant's property
     And I click on "Would you like to provide a title number?"
-    Then I expect to see an input field appear 
+    Then I expect to see an input field appear
     And that lets me enter a title number
     And I can validate title number on Land Registry database
 
@@ -116,7 +117,7 @@ Feature: Personal details
     When I visit "/claims/new"
     And I enter details about the tenant
     And I click on "You're taking court action against"
-    Then I expect to be able to select numerals up to 4 
+    Then I expect to be able to select numerals up to 4
     And that lets me enter a number of tenants in the property
     And I can see the number of tenants displayed
 
@@ -125,7 +126,7 @@ Feature: Personal details
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
     And I enter details about the tenant
-    And I confirm whether the tenant is living in the property in question or not 
+    And I confirm whether the tenant is living in the property in question or not
     Then I expect to see two radio buttons displayed
     And that lets me select either "Yes" or "No"
     And I expect when I select either for the radio button to be displayed as Selected
@@ -141,7 +142,7 @@ Feature: Personal details
     And I confirm whether the tenant is living in the property in question or not
     And I select "No" I expect to be able to enter an address manually
     And I click on "Enter address manually"
-    Then I expect to see input fields appear for Street, Town, Postcode 
+    Then I expect to see input fields appear for Street, Town, Postcode
     And that lets me enter address details manually
     And I enter text into the Postcode field I expect the inputted text to be validated
 
@@ -150,7 +151,7 @@ Feature: Personal details
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
     And I enter/make changes to details on the page
-    And I select "Save and come back later" 
+    And I select "Save and come back later"
     Then I expect the page to close and to save all changes on "/claims/:id/personal_details"
     And I expect "/your_claims/" to be displayed
 
