@@ -35,3 +35,25 @@ Run specs
 Run the specs with selenium
 
     rake browser=selenium
+
+#### Advanced Usage:
+
+Command line help:
+
+```shell
+rake help
+
+Runs cucumber features.
+
+Usage:
+rake [profile] [tag=tag_name]
+Show the set of defined tag names using the 'list_tags' profile
+```
+
+Predefined cucumber profiles:
+
+There are a small number of [cucumber profiles](.config/cucumber.yml) set up which automate some common scenarios.  Of note is `demo` mode, which uses the selenium browser & adds a pause to the end of each step definition. This is configured to test against the demo environment, for which the url is defined in [support/config/environments.yml](support/config/environments.yml)
+
+Additionally there is a `kamizake` profile which runs every available scenario, even the scenarios tagged @wip or @no-automation
+
+Finally, the list_tags profile dumps a crude list of all known tags to the console. This is a proof-of-concept that may one day evolve into a test automation progress-o-meter.
