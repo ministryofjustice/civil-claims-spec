@@ -96,7 +96,6 @@ Feature: Personal details
   Scenario: Start a new case, confirm claimant's address and contact details
     Given I am logged in as a Social Landlord delegate
     When I visit "/claims/new"
-    And I confirm that the displayed details of the claimant are correct
     Then I expect to see the correct Social Landlord name
     Then I expect to see the correct contact address (including street and postcode)
     Then I expect to see the correct name of the Social Landlord delegate
