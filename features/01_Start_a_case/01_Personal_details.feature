@@ -3,16 +3,17 @@ Feature: Personal details
   I want to enter the basic details of a claim
   So I can begin a repossession case
 
+  Background:
+    Given I am logged in as a Social Landlord delegate
+
   @sprint2
   Scenario: Check initial state of page
-    Given I am logged in as a Social Landlord delegate
      When I start a new claim
      Then I expect the page to contain 4 editable tenant sections
       And I expect that my pre-filled personal business details are correct
 
   @validations @sprint4
   Scenario Outline: Required fields
-    Given I am logged in as a Social Landlord delegate
     When I start a new claim
      And I enter valid details for everything except <form_field>
      And I click the 'Continue to next step' button
@@ -24,16 +25,14 @@ Feature: Personal details
     | tenant-email   | Email address must be in format name@server.com |
     | postcode       | Missing postcode!                               |
 
-  @validations @wip
+  @validations @sprint4
   Scenario Outline: Character length validation
-    When I visit "/claims/new"
-    And I am filling in the personal details <formitem>
-    And I enter a value with <number_of_characters> characters
-    Then I expect it to <validate>
-    And return the <message>
+    When I start a new claim
+    And I am filling in <formitem> with <number_of_characters>
+    Then I expect to get a <status> with <message>
 
     Examples:
-    | formitem          | number_of_characters   | validate | message                                         |
+    | formitem          | number_of_characters   | status   | message                                         |
     | tenant-email      | 3                      | fail     | Email address must be in format name@server.com |
     | postcode          | 10                     | fail     | This is not a valid postcode                    |
     | tenants full name | 50                     | pass     |                                                 |
