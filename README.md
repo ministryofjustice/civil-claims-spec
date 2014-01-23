@@ -1,6 +1,7 @@
 # Civil Claims Spec
 
-[![Build Status](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/badge/icon)](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/)
+JS enabled: [![Build Status](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/badge/icon)](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/)
+JS disabled: [![Build Status](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-no-js/badge/icon)](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-no-js/)
 
 Local installation
 ------------------
