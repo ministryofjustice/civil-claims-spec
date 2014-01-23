@@ -1,5 +1,7 @@
 # Civil Claims Spec
 
+[![Build Status](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/badge/icon)](http://jenkins-ubuntu.dsd.io/job/civilclaims-spec-js/)
+
 Local installation
 ------------------
 
