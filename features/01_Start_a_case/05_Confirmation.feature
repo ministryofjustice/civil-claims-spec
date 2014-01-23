@@ -1,4 +1,5 @@
-Feature: As a social landlord
+Feature: Social Landlord // Step 5 - Confirmation
+  As a social landlord
   I want to see confirmation that my case has been submitted to the court
   So I can confirm that the correct action has been taken
 

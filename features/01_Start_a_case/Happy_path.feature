@@ -1,4 +1,4 @@
-Feature: Create a claim
+Feature: Social Landlord // Happy Path
   In order to bring a case against a Tenant
   As a Social Landlord
   I want to create a Repossession Claim

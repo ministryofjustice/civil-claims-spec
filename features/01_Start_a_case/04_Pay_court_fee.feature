@@ -1,4 +1,5 @@
-Feature: As a social landlord
+Feature: Social Landlord // Step 4 - Court Fee
+  As a social landlord
   I wish to be informed of my hearing date,
   have my payment details clarified,
   and agree terms

@@ -1,4 +1,5 @@
-Feature: As a social landlord
+Feature: Social Landlord // Landing page
+  As a social landlord
   I want to see a landing page when I log in
   So I can see the options available to me
 

@@ -1,4 +1,4 @@
-Feature: Social Landlord, Start a case, Case details
+Feature: Social Landlord // Step 2 - Case details
 
     @sprint2 @no-automation
     Scenario: Before entering case details, check initial state of page

@@ -1,4 +1,4 @@
-Feature: Social Landlord, Submit Claim, Step 3
+Feature: Social Landlord // Step 3 - Check claim details
 
   Background:
     Given I am logged in as a Social Landlord delegate

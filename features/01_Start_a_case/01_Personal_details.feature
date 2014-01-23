@@ -1,4 +1,4 @@
-Feature: Personal details
+Feature: Social Landlord // Step 1 - Personal details
   As a Social Landlord
   I want to enter the basic details of a claim
   So I can begin a repossession case

@@ -1,4 +1,5 @@
-Feature: As a Social Landlord
+Feature: Login
+  As a Social Landlord
   I want to login to UCC
   So I am able to submit a claim
 
@@ -10,8 +11,8 @@ Feature: As a Social Landlord
      And I see the following <error> message
 
     Examples:
-    | username     | password       | error  |
-    | valid        | invalid        | Incorrect username or password |
+    | username        | password       | error  |
+    | test@user.com   | 12345678       | Incorrect username or password |
 
   @sprint3
   Scenario: Logout
