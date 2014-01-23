@@ -37,21 +37,6 @@ Feature: Social Landlord // Step 1 - Personal details
     | postcode          | 10                     | fail     | This is not a valid postcode                    |
     | tenants full name | 50                     | pass     |                                                 |
 
-  @validations @wip
-  Scenario Outline: Radio buttons validation
-    Given I am logged as a Social Landlord delegate
-    And I visit the personal details page of the claim form
-    And I click on "Continue to next step"
-    And I don't select any choice for <choice>
-    Then I expect it to fail
-    And return the <message>
-
-    Examples:
-    | choice                    | message                                    |
-    | "Who is in the Property?" | "You must indicate who is in the property" |
-    | "Address"                 | "You must indicate where the tenants are"  |
-
-
   @ia @wip
   Scenario Outline: Access control
     Given a new claim with a Property, Claimant and Tenant
