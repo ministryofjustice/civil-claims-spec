@@ -11,8 +11,8 @@ Then(/^there to be an (.*) message$/) do |message|
 end
 
 When(/^I am filling in (.*) with (\d+)$/) do |item, num|
-  @app.repossession_claim.step_1.tenants.tenant do
-    |tenant| tenant.send(item.to_sym).set ("x" * "num".to_i)
+  @app.repossession_claim.step_1.tenants.tenant do |tenant|
+    tenant.send(item.to_sym).set ("x" * "num".to_i)
   end
 end
 
