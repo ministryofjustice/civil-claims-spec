@@ -126,12 +126,13 @@ Feature: Social Landlord // Step 2 - Case details
     | total unpaid rent   | 1234567890 | fail     | Rent amount seems too big |
     | total unpaid rent   |       2000 | pass     |                           |
 
-    @validations @wip
+    @validations @sprint4
     Scenario Outline: numeral validation
-    When I visit "/claims/new"
+    When I start a new claim
+    And I continue to Step 2
     And I am filling in the claim details <formitem>
     And I enter the <text>
-    Then I expect it to <validate>
+    Then I expect it to <validate> for <formitem>
     And return the <message>
 
     Examples:
@@ -139,6 +140,7 @@ Feature: Social Landlord // Step 2 - Case details
     | rent amount       | 0123  | fail     | Rent amounts cannot start with 0 |
     | daily rent amount | 0123  | fail     | Rent amounts cannot start with 0 |
     | total unpaid rent | 0123  | fail     | Rent amounts cannot start with 0 |
+    | total unpaid rent | 123   | pass     |                                  |
 
      @validations @wip
     Scenario Outline: numeral amount validation
