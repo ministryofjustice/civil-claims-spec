@@ -110,19 +110,20 @@ Feature: Social Landlord // Step 2 - Case details
     | daily rent amount | abc  | fail     | Numerals only |
     | total unpaid rent | abc  | fail     | Numerals only |
 
-    @validations @wip
+    @validations @stage4 @now
     Scenario Outline: numeral length validation
-    When I visit "/claims/new"
+    When I start a new claim
+    And I click the 'Continue to next step' button
     And I am filling in the claim details <formitem>
     And I enter the <text>
-    Then I expect it to <validate>
+    Then I expect it to <validate> for <formitem>
     And return the <message>
 
     Examples:
-    | formitem          | text        | validate | message                   |
-    | rent amount       | 1234567890  | fail     | Rent amount seems too big |
-    | daily rent amount | 1234567890  | fail     | Rent amount seems too big |
-    | total unpaid rent | 1234567890  | fail     | Rent amount seems too big |
+    | formitem            | text       | validate | message                   |
+    | rent amount         | 1234567890 | fail     | Rent amount seems too big |
+    | daily rent amount   | 1234567890 | fail     | Rent amount seems too big |
+    | total unpaid rent   | 1234567890 | fail     | Rent amount seems too big |
 
     @validations @wip
     Scenario Outline: numeral validation
