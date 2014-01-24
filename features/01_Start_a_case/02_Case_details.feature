@@ -1,5 +1,8 @@
 Feature: Social Landlord // Step 2 - Case details
 
+  Background:
+    Given I am logged in as a Social Landlord delegate
+
     @sprint2 @no-automation
     Scenario: Before entering case details, check initial state of page
     Given I am logged in as a Social Landlord delegate
@@ -92,19 +95,20 @@ Feature: Social Landlord // Step 2 - Case details
     Then I expect to see displayed a non selected tick box
     And when I select the tick box I expect the tick box to be displayed as selected
 
-    @validations @wip
+    @validations @sprint4
     Scenario Outline: Numeral input validation
-    When I visit "/claims/new"
+    When I start a new claim
+    And I continue to Step 2
     And I am filling in the claim details <formitem>
     And I enter the <text>
-    Then I expect it to <validate>
+    Then I expect it to <validate> for <formitem>
     And return the <message>
 
     Examples:
-    | formitem          | text | validate | message                 |
-    | rent amount       | abc  | fail     | Numerals only           |
-    | daily rent amount | abc  | fail     | Numerals only           |
-    | total unpaid rent | abc  | fail     | Numerals only           |
+    | formitem          | text | validate | message       |
+    | rent amount       | abc  | fail     | Numerals only |
+    | daily rent amount | abc  | fail     | Numerals only |
+    | total unpaid rent | abc  | fail     | Numerals only |
 
     @validations @wip
     Scenario Outline: numeral length validation
@@ -120,7 +124,7 @@ Feature: Social Landlord // Step 2 - Case details
     | daily rent amount | 1234567890  | fail     | Rent amount seems too big |
     | total unpaid rent | 1234567890  | fail     | Rent amount seems too big |
 
-     @validations @wip
+    @validations @wip
     Scenario Outline: numeral validation
     When I visit "/claims/new"
     And I am filling in the claim details <formitem>
@@ -189,4 +193,3 @@ Feature: Social Landlord // Step 2 - Case details
     Given there are 1000 concurent users of the system
     When they all retrieve a claim
     Then I expect page response times to remain under 5ms
-    
