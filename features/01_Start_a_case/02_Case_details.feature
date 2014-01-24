@@ -142,17 +142,19 @@ Feature: Social Landlord // Step 2 - Case details
     | total unpaid rent | 0123  | fail     | Rent amounts cannot start with 0 |
     | total unpaid rent | 123   | pass     |                                  |
 
-     @validations @wip
+    @validations @sprint4
     Scenario Outline: numeral amount validation
-    When I visit "/claims/new"
+    When I start a new claim
+    And I continue to Step 2
     And I am filling in the claim details <formitem>
     And I enter the <text>
-    Then I expect it to <validate>
+    Then I expect it to <validate> for <formitem>
     And return the <message>
 
     Examples:
-    | formitem                                 | text | validate | message                                            |
-    | daily rent amount related to rent amount | 123  | fail     | Daily rent amount cannot be higher than "x" amount |
+    | formitem          | text | validate | message                                             |
+    | daily rent amount | 1230 | fail     | Daily rent amount cannot be higher than rent amount |
+    | daily rent amount |  123 | pass     |                                                     |
 
     @wip
     Scenario Outline: Radio buttons validation
