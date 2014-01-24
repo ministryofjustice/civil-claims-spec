@@ -12,8 +12,17 @@ end
 
 Then(/^I expect it to (\w+) for (.*)$/) do |status, item|
   name = item.gsub(' ', '_')
-  id = "claim_case_detail_#{name}"
-  within(:css, id) { page.should have_content "Error text here"}
+  id = "#claim_case_detail_#{name}"
+
+  within(:css, id) do
+    if status == "fail"
+      within(:css, ".error") do
+        page.should have_content "Error text here"
+      end
+    else
+      page.should_not have_content "Error text here"
+    end
+  end
 end
 
 Then(/^return the (.*)$/) do |message|
