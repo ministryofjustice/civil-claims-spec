@@ -19,3 +19,7 @@ end
 Then(/^return the (.*)$/) do |message|
   within(:css, ".error-summary") { page.should have_content message }
 end
+
+When(/^I continue to Step 2$/) do
+  step "I click the 'Continue to next step' button"
+end
