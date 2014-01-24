@@ -124,6 +124,7 @@ Feature: Social Landlord // Step 2 - Case details
     | rent amount         | 1234567890 | fail     | Rent amount seems too big |
     | daily rent amount   | 1234567890 | fail     | Rent amount seems too big |
     | total unpaid rent   | 1234567890 | fail     | Rent amount seems too big |
+    | total unpaid rent   |       2000 | pass     |                           |
 
     @validations @wip
     Scenario Outline: numeral validation
