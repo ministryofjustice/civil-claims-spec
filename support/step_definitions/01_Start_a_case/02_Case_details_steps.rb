@@ -11,16 +11,17 @@ When(/^I enter the (\w+)$/) do |text|
 end
 
 Then(/^I expect it to (\w+) for (.*)$/) do |status, item|
-  if status == "fail"
-    name = item.gsub(' ', '_')
-    id = "#claim_case_detail_#{name}"
-    within(:css, id) do
+  name = item.gsub(' ', '_')
+  id = "#claim_case_detail_#{name}"
+
+  within(:css, id) do
+    if status == "fail"
       within(:css, ".error") do
         page.should have_content "Error text here"
       end
+    else
+      page.should_not have_content "Error text here"
     end
-  else
-    page.should_not have_content "Error text here"
   end
 end
 
