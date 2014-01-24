@@ -110,7 +110,7 @@ Feature: Social Landlord // Step 2 - Case details
     | daily rent amount | abc  | fail     | Numerals only |
     | total unpaid rent | abc  | fail     | Numerals only |
 
-    @validations @stage4
+    @validations @sprint4
     Scenario Outline: numeral length validation
     When I start a new claim
     And I continue to Step 2
