@@ -95,7 +95,7 @@ Feature: Social Landlord // Step 2 - Case details
     Then I expect to see displayed a non selected tick box
     And when I select the tick box I expect the tick box to be displayed as selected
 
-    @validations @stage4
+    @validations @sprint4
     Scenario Outline: Numeral input validation
     When I start a new claim
     And I click the 'Continue to next step' button
